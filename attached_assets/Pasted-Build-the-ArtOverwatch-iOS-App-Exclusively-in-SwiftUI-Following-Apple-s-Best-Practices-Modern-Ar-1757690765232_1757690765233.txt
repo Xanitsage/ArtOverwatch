@@ -1,0 +1,405 @@
+Build the ArtOverwatch iOS App Exclusively in SwiftUI — Following Apple’s Best Practices & Modern Architecture
+✅ Objective
+Design and implement the ArtOverwatch iOS application using SwiftUI exclusively — no UIKit components, no Storyboards, no programmatic UIViews. The app must embody Apple’s human interface guidelines, leverage modern Swift concurrency, and follow a modular, testable, scalable architecture inspired by Elm + Composition Root, as validated by industry-leading iOS development practices.
+
+This is not a prototype. This is a production-grade, enterprise-ready creative platform that treats artists as CEOs of their own intellectual property businesses.
+
+🏗️ App Overview
+Name: ArtOverwatch
+Tagline: “Full control. Full vision.”
+Mission:
+A unified, corporate-grade iOS platform empowering visual artists to own and manage their entire creative enterprise — from idea incubation to IP protection, revenue tracking, branding, treasury management, and community ownership — all within a single, beautifully crafted, secure, and intuitive experience. Eliminate fragmented tools; replace them with an elegant, cohesive system that scales with the artist’s ambition.
+⚙️ Core Technical Requirements
+1. Technology Stack — SwiftUI Only
+UI Framework: SwiftUI exclusively — zero UIKit (UIView, UIViewController, UITableView, etc.) permitted.
+State Management & Architecture:
+Implement a modular Elm-inspired architecture with two layers:
+Scene-Level (Elm Pattern):
+Each feature module follows:
+State → Event → Effect → Reducer → View
+State: Immutable struct (single source of truth)
+Event: Enum of user/system actions (e.g., .userTappedRegisterIP)
+Effect: Enum of side effects (e.g., .apiCallFetchIPStatus) — separate from Events!
+Reducer: Pure functions (transform and apply) — no side effects inside views
+Environment: Dependency injection container (API, storage, auth services)
+View: Pure function of State — no business logic
+App-Level (Composition Root):
+Use Swift Package Manager (SPM) to modularize the codebase into isolated packages:
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+ArtOverwatch/
+├── ArtOverwatchApp.swift                 // Entry point
+├── Core/                                 // Shared infrastructure
+│   ├── Models/                           // Codable domain models
+│   ├── Services/                         // Protocol-based abstractions (API, Storage, Auth)
+│   ├── Utils/                            // Extensions, error handling, date formatters
+│   └── Dependencies/                     // Composition Root: resolves all dependencies
+├── Features/                             // Independent feature modules (one per flow)
+│   ├── Dashboard/                        // Main hub: IP overview, revenue, community
+│   ├── IPManagement/                     // Create, register, protect IP
+│   ├── RevenueTracker/                   // Royalties, payments, treasury dashboard
+│   ├── BrandingStudio/                   // Logo, color palette, typography, asset library
+│   ├── Community/                        // Fan engagement, tokenized ownership, NFTs
+│   └── Settings/                         // Accounts, privacy, notifications, backups
+└── Resources/                            // Assets, fonts, localization
+    ├── Assets.xcassets/
+    ├── Fonts/
+    └── Localizations/
+✅ Each feature package must be independently compilable, testable, and importable.
+✅ No global state. No singletons. All dependencies injected via Environment. 
+
+2. Concurrency — Async/Await Only
+Use Swift Concurrency (async/await) for all network calls, file I/O, and background operations.
+Replace Combine with async/await where possible — prefer simplicity over reactive complexity.
+If Combine is used (e.g., for system events), wrap it cleanly in async interfaces.
+Never use GCD directly unless absolutely necessary (e.g., low-level threading).
+3. Persistence — SwiftData or Core Data
+Prefer SwiftData (iOS 17+) for SwiftUI-native modeling.
+If targeting iOS 16, use Core Data with @FetchRequest and NSManagedObject.
+All data models must conform to Identifiable, Codable, and Equatable.
+4. Networking — URLSession Only
+Use URLSession with async/await and structured concurrency.
+No third-party libraries (Alamofire, Moya, etc.).
+Wrap API calls in protocol-based services injected via Environment.
+5. Testing — Mandatory
+Unit Tests: Test reducers with mock environments. Validate state transitions on every event/effect combination.
+Snapshot Tests: Capture UI states using XCTest screenshot capture or SnapshotTesting framework — ensure UI consistency across modes and devices.
+Test Coverage Goal: >85% for core business logic (reducers, models, services).
+🖌️ Human Interface Guidelines Compliance — Apple HIG (Mandatory)
+Every screen must adhere to Apple’s Human Interface Guidelines. Do not guess — reference these links directly.
+
+CATEGORY
+IMPLEMENTATION REQUIREMENT
+Layout & Organization
+Use
+LazyVStack
+,
+LazyHGrid
+,
+NavigationStack
+,
+SplitView
+,
+ScrollView
+. Respect intrinsic content sizing. Avoid fixed frames.
+Typography
+Use semantic fonts:
+.font(.title)
+,
+.font(.callout)
+,
+.font(.footnote)
+— never hardcode sizes. Support Dynamic Type.
+Color & Dark Mode
+Use
+system colors
+:
+Color.primary
+,
+Color.accentColor
+,
+Color.secondarySystemBackground
+. Fully support Dark Mode via
+@Environment(\.colorScheme)
+. Never hardcode RGB.
+Icons & Symbols
+Use
+SF Symbols
+exclusively. Customize with
+.symbolVariant()
+(e.g.,
+.fill
+,
+.bold
+). Never embed PNG icons except for the app logo.
+Immersive Experiences
+Use
+FullscreenCover
+,
+presentationDetents
+, and
+ignoresSafeArea()
+sparingly. Prioritize content over chrome.
+Motion & Feedback
+Use built-in animations (
+withAnimation
+). Respect
+accessibilityReduceMotion
+. Use haptics via
+UIImpactFeedbackGenerator
+wrapped in a service.
+Inclusion & Accessibility
+Every interactive element has
+accessibilityLabel
+,
+accessibilityHint
+. Support VoiceOver, Dynamic Type, Reduce Transparency, High Contrast.
+Privacy & Security
+Request permissions explicitly (
+NSPhotoLibraryUsageDescription
+, etc.). Store tokens in Keychain. Never log sensitive data.
+Navigation
+Use
+NavigationStack
++
+navigationDestination
+for deep linking. Avoid tab bars unless >3 top-level sections. Use
+toolbar
+for actions.
+Input & Controls
+Use native controls:
+TextField
+,
+Picker
+,
+Toggle
+,
+Button
+,
+SegmentedControl
+. Match HIG styles exactly. Avoid custom sliders or pickers unless justified.
+Loading & Performance
+Show skeleton views or progress indicators during async loads. Use
+@StateObject
+for view-model lifetimes. Avoid heavy computations on main thread.
+Brand Identity
+Apply consistent color palette, iconography, and tone-of-voice across all screens. Align with “corporate-grade creative tool” positioning.
+
+🔗 Mandatory HIG References — Full URLs (Copy-Paste Ready)
+Apple HIG: Designing for iOS — https://developer.apple.com/design/human-interface-guidelines/designing-for-ios/
+Dark Mode — https://developer.apple.com/design/human-interface-guidelines/dark-mode
+SwiftUI Overview — https://developer.apple.com/documentation/technologyoverviews/swiftui
+UIKit vs SwiftUI — https://developer.apple.com/documentation/technologyoverviews/uikit-appkit
+App Icons — https://developer.apple.com/design/human-interface-guidelines/app-icons
+Branding — https://developer.apple.com/design/human-interface-guidelines/branding
+Color — https://developer.apple.com/design/human-interface-guidelines/color
+Icons — https://developer.apple.com/design/human-interface-guidelines/icons
+Images — https://developer.apple.com/design/human-interface-guidelines/images
+Immersive Experiences — https://developer.apple.com/design/human-interface-guidelines/immersive-experiences
+Inclusion — https://developer.apple.com/design/human-interface-guidelines/inclusion
+Layout — https://developer.apple.com/design/human-interface-guidelines/layout
+Materials — https://developer.apple.com/design/human-interface-guidelines/materials
+Motion — https://developer.apple.com/design/human-interface-guidelines/motion
+Privacy — https://developer.apple.com/design/human-interface-guidelines/privacy
+SF Symbols — https://developer.apple.com/design/human-interface-guidelines/sf-symbols
+Typography — https://developer.apple.com/design/human-interface-guidelines/typography
+Writing — https://developer.apple.com/design/human-interface-guidelines/writing
+Charting Data — https://developer.apple.com/design/human-interface-guidelines/charting-data
+Collaboration and Sharing — https://developer.apple.com/design/human-interface-guidelines/collaboration-and-sharing
+Drag and Drop — https://developer.apple.com/design/human-interface-guidelines/drag-and-drop
+Entering Data — https://developer.apple.com/design/human-interface-guidelines/entering-data
+Feedback — https://developer.apple.com/design/human-interface-guidelines/feedback
+File Management — https://developer.apple.com/design/human-interface-guidelines/file-management
+Going Full Screen — https://developer.apple.com/design/human-interface-guidelines/going-full-screen
+Launching — https://developer.apple.com/design/human-interface-guidelines/launching
+Loading — https://developer.apple.com/design/human-interface-guidelines/loading
+Managing Accounts — https://developer.apple.com/design/human-interface-guidelines/managing-accounts
+Managing Notifications — https://developer.apple.com/design/human-interface-guidelines/managing-notifications
+Modality — https://developer.apple.com/design/human-interface-guidelines/modality
+Multitasking — https://developer.apple.com/design/human-interface-guidelines/multitasking
+Offering Help — https://developer.apple.com/design/human-interface-guidelines/offering-help
+Onboarding — https://developer.apple.com/design/human-interface-guidelines/onboarding
+Playing Audio — https://developer.apple.com/design/human-interface-guidelines/playing-audio
+Playing Haptics — https://developer.apple.com/design/human-interface-guidelines/playing-haptics
+Playing Video — https://developer.apple.com/design/human-interface-guidelines/playing-video
+Printing — https://developer.apple.com/design/human-interface-guidelines/printing
+Searching — https://developer.apple.com/design/human-interface-guidelines/searching
+Settings — https://developer.apple.com/design/human-interface-guidelines/settings
+Undo and Redo — https://developer.apple.com/design/human-interface-guidelines/undo-and-redo
+Content — https://developer.apple.com/design/human-interface-guidelines/content
+Charts — https://developer.apple.com/design/human-interface-guidelines/charts
+Image Views — https://developer.apple.com/design/human-interface-guidelines/image-views
+Text Views — https://developer.apple.com/design/human-interface-guidelines/text-views
+Layout and Organization — https://developer.apple.com/design/human-interface-guidelines/layout-and-organization
+Boxes — https://developer.apple.com/design/human-interface-guidelines/boxes
+Collections — https://developer.apple.com/design/human-interface-guidelines/collections
+Column Views — https://developer.apple.com/design/human-interface-guidelines/column-views
+Disclosure Controls — https://developer.apple.com/design/human-interface-guidelines/disclosure-controls
+Labels — https://developer.apple.com/design/human-interface-guidelines/labels
+Lists and Tables — https://developer.apple.com/design/human-interface-guidelines/lists-and-tables
+Lockups — https://developer.apple.com/design/human-interface-guidelines/lockups
+Outline Views — https://developer.apple.com/design/human-interface-guidelines/outline-views
+Split Views — https://developer.apple.com/design/human-interface-guidelines/split-views
+Tab Views — https://developer.apple.com/design/human-interface-guidelines/tab-views
+Menus and Actions — https://developer.apple.com/design/human-interface-guidelines/menus-and-actions
+Activity Views — https://developer.apple.com/design/human-interface-guidelines/activity-views
+Buttons — https://developer.apple.com/design/human-interface-guidelines/buttons
+Context Menus — https://developer.apple.com/design/human-interface-guidelines/context-menus
+Dock Menus — https://developer.apple.com/design/human-interface-guidelines/dock-menus
+Edit Menus — https://developer.apple.com/design/human-interface-guidelines/edit-menus
+Home Screen Quick Actions — https://developer.apple.com/design/human-interface-guidelines/home-screen-quick-actions
+Menus — https://developer.apple.com/design/human-interface-guidelines/menus
+Ornaments — https://developer.apple.com/design/human-interface-guidelines/ornaments
+Pop-up Buttons — https://developer.apple.com/design/human-interface-guidelines/pop-up-buttons
+Pull-down Buttons — https://developer.apple.com/design/human-interface-guidelines/pull-down-buttons
+The Menu Bar — https://developer.apple.com/design/human-interface-guidelines/the-menu-bar
+Toolbars — https://developer.apple.com/design/human-interface-guidelines/toolbars
+Navigation and Search — https://developer.apple.com/design/human-interface-guidelines/navigation-and-search
+Path Controls — https://developer.apple.com/design/human-interface-guidelines/path-controls
+Search Fields — https://developer.apple.com/design/human-interface-guidelines/search-fields
+Sidebars — https://developer.apple.com/design/human-interface-guidelines/sidebars
+Tab Bars — https://developer.apple.com/design/human-interface-guidelines/tab-bars
+Token Fields — https://developer.apple.com/design/human-interface-guidelines/token-fields
+Presentation — https://developer.apple.com/design/human-interface-guidelines/presentation
+Action Sheets — https://developer.apple.com/design/human-interface-guidelines/action-sheets
+Alerts — https://developer.apple.com/design/human-interface-guidelines/alerts
+Page Controls — https://developer.apple.com/design/human-interface-guidelines/page-controls
+Panels — https://developer.apple.com/design/human-interface-guidelines/panels
+Popovers — https://developer.apple.com/design/human-interface-guidelines/popovers
+Scroll Views — https://developer.apple.com/design/human-interface-guidelines/scroll-views
+Sheets — https://developer.apple.com/design/human-interface-guidelines/sheets
+Windows — https://developer.apple.com/design/human-interface-guidelines/windows
+Selection and Input — https://developer.apple.com/design/human-interface-guidelines/selection-and-input
+Color Wells — https://developer.apple.com/design/human-interface-guidelines/color-wells
+Combo Boxes — https://developer.apple.com/design/human-interface-guidelines/combo-boxes
+Digit Entry Views — https://developer.apple.com/design/human-interface-guidelines/digit-entry-views
+Image Wells — https://developer.apple.com/design/human-interface-guidelines/image-wells
+Pickers — https://developer.apple.com/design/human-interface-guidelines/pickers
+Segmented Controls — https://developer.apple.com/design/human-interface-guidelines/segmented-controls
+Sliders — https://developer.apple.com/design/human-interface-guidelines/sliders
+Steppers — https://developer.apple.com/design/human-interface-guidelines/steppers
+Text Fields — https://developer.apple.com/design/human-interface-guidelines/text-fields
+Toggles — https://developer.apple.com/design/human-interface-guidelines/toggles
+Virtual Keyboards — https://developer.apple.com/design/human-interface-guidelines/virtual-keyboards
+Status — https://developer.apple.com/design/human-interface-guidelines/status
+Activity Rings — https://developer.apple.com/design/human-interface-guidelines/activity-rings
+Gauges — https://developer.apple.com/design/human-interface-guidelines/gauges
+Progress Indicators — https://developer.apple.com/design/human-interface-guidelines/progress-indicators
+System Experiences — https://developer.apple.com/design/human-interface-guidelines/system-experiences
+App Shortcuts — https://developer.apple.com/design/human-interface-guidelines/app-shortcuts
+Controls — https://developer.apple.com/design/human-interface-guidelines/controls
+Notifications — https://developer.apple.com/design/human-interface-guidelines/notifications
+Status Bars — https://developer.apple.com/design/human-interface-guidelines/status-bars
+Widgets — https://developer.apple.com/design/human-interface-guidelines/widgets
+Keyboards — https://developer.apple.com/design/human-interface-guidelines/keyboards
+Camera Control — https://developer.apple.com/design/human-interface-guidelines/camera-control
+Apple Pay — https://developer.apple.com/design/human-interface-guidelines/apple-pay
+Sign In with Apple — https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple
+Wallet — https://developer.apple.com/design/human-interface-guidelines/wallet
+NFC — https://developer.apple.com/design/human-interface-guidelines/nfc
+ID Verifier — https://developer.apple.com/design/human-interface-guidelines/id-verifier
+✅ All above links must be reviewed and applied.
+❌ If a component is described in HIG, you must use the native SwiftUI equivalent.
+❌ Do not create custom buttons, sliders, or pickers unless explicitly justified and approved by Apple’s design principles. 
+
+🧠 Architecture Philosophy — Based on Modern iOS Best Practices
+✅ Adopt the Elm Architecture + Composition Root
+(Source: Modern Architecture for iOS Apps — https://medium.com/@antony.karpov/modern-architecture-for-ios-apps-7a791439f9e3 )
+
+Single Source of Truth: State is immutable. Changed only via pure Reducer functions.
+Unidirectional Flow:
+User Action → Event → Reducer (with Environment) → New State → View Rebuild
+Event/Effect Separation:
+Event: Public, user-initiated actions (case userDidTapSave)
+Effect: Private, internal side effects (case apiCallSucceeded)
+→ Prevents external tampering with internal logic.
+Pure Functions Everywhere:
+transform(event: Event, state: State, environment: Environment) async -> Effect
+apply(effect: Effect, state: inout State) async -> State
+→ Enables 100% testability without mocks.
+Dependency Injection via Environment:
+swift
+
+
+1
+2
+3
+4
+5
+struct AppEnvironment {
+    let ipService: IPServiceProtocol
+    let authService: AuthServiceProtocol
+    let storage: StorageProtocol
+}
+Modularity via SPM:
+Each feature = separate Swift Package.
+→ Enables parallel team development, faster builds, clear boundaries.
+✅ Avoid These Anti-Patterns
+❌ Massive ViewControllers
+❌ Global state / singletons
+❌ Business logic inside views
+❌ Hardcoded colors/fonts/sizes
+❌ Third-party frameworks (RxSwift, Alamofire, Kingfisher, etc.)
+❌ UIKit components under any circumstance
+❌ Storyboards or XIBs
+❌ Combine unless absolutely necessary (prefer async/await)
+❌ Using deprecated patterns like VIPER or RIBs with SwiftUI
+📦 Asset & Branding Requirements
+App Icon: Follow App Icons HIG — adaptive mask, no transparency artifacts, all required sizes.
+SF Symbols: Use for all UI icons. Customize weight/variant. Never bundle PNG icons except for the logo.
+Color Palette: Define brand colors as Color extensions using UIColor.systemBlue as base. Ensure WCAG AA contrast.
+Typography: Use San Francisco (SF Pro). Use semantic styles: .headline, .callout, .footnote.
+Images: Use .resizable(), .aspectRatio(contentMode: .fit). Optimize assets in Assets Catalog.
+Localization: Support English (en-US) initially. Structure strings for easy future expansion.
+🚀 Advanced Features (Stretch Goals)
+Onboarding Flow: Guided setup using FullScreenCover with step-by-step explanations (follow HIG Onboarding — https://developer.apple.com/design/human-interface-guidelines/onboarding ).
+Dark/Light Mode Toggle: Respect system setting, allow override in Settings (persist via UserDefaults wrapped in service).
+Notifications: Register for remote/local notifications (e.g., royalty updates, IP registration confirmations) using UserNotifications.
+Share Extension: Allow users to share artwork metadata or IP certificates via ShareSheet.
+Widget: Create a Home Screen widget showing daily revenue summary or upcoming IP deadlines (use WidgetKit).
+Sign in with Apple: Primary authentication method (follow HIG Sign In with Apple — https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple ).
+📤 Deliverables
+A fully functional SwiftUI-only iOS app named ArtOverwatch.
+Clean, documented code organized into SPM packages as described.
+Unit tests and snapshot tests covering core state logic and UI.
+A README.md documenting:
+Architecture decision rationale
+How to run the app
+How to add a new feature module
+Checklist of HIG compliance (link each screen to its HIG section)
+Screenshots demonstrating:
+Dark/light mode
+Accessibility features
+Responsive layout on iPhone and iPad
+Key workflows (e.g., registering IP, viewing revenue)
+🚫 DO NOT DO
+❌ Use UIKit components (UIView, UIViewController, UITableView, UILabel, etc.)
+❌ Use third-party frameworks (RxSwift, Alamofire, Kingfisher, etc.)
+❌ Hardcode colors, fonts, or sizes
+❌ Use global state or singletons for business logic
+❌ Ignore accessibility or dynamic type
+❌ Use Storyboards or XIBs
+❌ Use Combine unless absolutely necessary (prefer async/await)
+❌ Use @StateObject for non-view-model objects
+📚 Final Reference Sources (Fully Expanded URLs)
+SOURCE
+PURPOSE
+Apple: Dissecting an App’s Architecture
+https://developer.apple.com/tutorials/app-dev-training/dissecting-an-apps-architecture
+Medium: Modern Architecture for iOS Apps
+https://medium.com/@antony.karpov/modern-architecture-for-ios-apps-7a791439f9e3
+Apple: SwiftUI Overview
+https://developer.apple.com/documentation/technologyoverviews/swiftui
+Apple: UIKit vs SwiftUI
+https://developer.apple.com/documentation/technologyoverviews/uikit-appkit
+Apple: Adopting Liquid Glass
+https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass
+Apple: Human Interface Guidelines (All Sections)
+https://developer.apple.com/design/human-interface-guidelines/
+
+✅ All references above have been reviewed, cleaned, and integrated.
+✅ This prompt is now self-contained, authoritative, and enforceable. 
+
+💬 Final Note
+Build not just an app — build a reference implementation of modern, scalable, Apple-compliant SwiftUI architecture for creative professionals.
+This is your chance to set the standard for how artists interact with their intellectual property — elegantly, securely, and powerfully. 
+
+Ship with pride. Architect with purpose.

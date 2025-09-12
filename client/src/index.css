@@ -122,6 +122,94 @@
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+.liquid-glass {
+  --button-outline: rgba(255,255,255, .20);
+  --badge-outline: rgba(255,255,255, .15);
+
+  --opaque-button-border-intensity: -2;  /* In terms of percentages */
+
+  /* Backgrounds applied on top of other backgrounds when hovered/active */
+  --elevate-1: rgba(255,255,255, .08);
+  --elevate-2: rgba(255,255,255, .15);
+
+  --background: 240 100% 98%;
+
+  --foreground: 215 25% 27%;
+
+  --border: 220 40% 88%;
+
+  --card: 0 0% 100%;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  --card-foreground: 215 25% 27%;
+
+  --card-border: 220 40% 88%;
+
+  --sidebar: 240 100% 99%;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+
+  --sidebar-foreground: 215 25% 27%;
+
+  --sidebar-border: 220 40% 88%;
+
+  --sidebar-primary: 220 90% 56%;
+
+  --sidebar-primary-foreground: 0 0% 100%;
+
+  --sidebar-accent: 220 60% 96%;
+
+  --sidebar-accent-foreground: 215 25% 27%;
+
+  --sidebar-ring: 220 90% 56%;
+
+  --popover: 0 0% 100%;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  --popover-foreground: 215 25% 27%;
+
+  --popover-border: 220 40% 88%;
+
+  --primary: 220 90% 56%;
+
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 220 60% 96%;
+
+  --secondary-foreground: 215 25% 27%;
+
+  --muted: 220 60% 96%;
+
+  --muted-foreground: 215 15% 45%;
+
+  --accent: 220 60% 96%;
+
+  --accent-foreground: 215 25% 27%;
+
+  --destructive: 356 91% 54%;
+
+  --destructive-foreground: 0 0% 100%;
+
+  --input: 220 40% 88%;
+  --ring: 220 90% 56%;
+  --chart-1: 204 88% 53%;
+  --chart-2: 160 100% 36%;
+  --chart-3: 42 93% 56%;
+  --chart-4: 147 79% 42%;
+  --chart-5: 341 75% 51%;
+
+  --shadow-2xs: 0px 2px 8px 0px rgba(220, 220, 220, 0.3);
+  --shadow-xs: 0px 4px 12px 0px rgba(220, 220, 220, 0.35);
+  --shadow-sm: 0px 6px 16px 0px rgba(220, 220, 220, 0.4), 0px 2px 4px -1px rgba(220, 220, 220, 0.25);
+  --shadow: 0px 8px 20px 0px rgba(220, 220, 220, 0.45), 0px 3px 6px -1px rgba(220, 220, 220, 0.3);
+  --shadow-md: 0px 10px 24px 0px rgba(220, 220, 220, 0.5), 0px 4px 8px -1px rgba(220, 220, 220, 0.35);
+  --shadow-lg: 0px 16px 32px 0px rgba(220, 220, 220, 0.55), 0px 6px 12px -1px rgba(220, 220, 220, 0.4);
+  --shadow-xl: 0px 24px 48px 0px rgba(220, 220, 220, 0.6), 0px 8px 16px -1px rgba(220, 220, 220, 0.45);
+  --shadow-2xl: 0px 32px 64px 0px rgba(220, 220, 220, 0.65);
+}
+
 .dark {
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
@@ -212,6 +300,45 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Liquid Glass iOS Theme Effects */
+  .liquid-glass .hover-elevate:hover {
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  .liquid-glass [data-state="open"] {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .liquid-glass .bg-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  .liquid-glass .bg-sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .liquid-glass .bg-popover {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   }
 }
 

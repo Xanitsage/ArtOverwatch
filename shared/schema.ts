@@ -75,9 +75,10 @@ export const stakeholders = pgTable("stakeholders", {
 export const creativeSessions = pgTable("creative_sessions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   entityId: varchar("entity_id").references(() => entities.id),
-  title: text("title").notNull(),
-  discipline: text("discipline").notNull(), // music, visual, writing, business
-  duration: integer("duration").notNull(), // minutes
+  title: text("title"),
+  type: text("type").notNull(), // painting, digital_art, client_work, etc.
+  discipline: text("discipline"), // music, visual, writing, business (legacy)
+  duration: integer("duration").notNull().default(0), // minutes
   output: text("output"), // Description of what was created
   mood: text("mood"), // creative, business, wellness
   intensity: text("intensity").default("medium"), // low, medium, high
@@ -90,6 +91,7 @@ export const goals = pgTable("goals", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   entityId: varchar("entity_id").references(() => entities.id),
   type: text("type").notNull(), // daily_create, daily_business, daily_wellness, weekly_revenue
+  category: text("category").notNull().default("creative"), // creative, business, wellness
   target: integer("target").notNull(), // Target value (minutes, amount, count)
   current: integer("current").notNull().default(0),
   period: text("period").notNull().default("daily"), // daily, weekly, monthly
@@ -103,6 +105,7 @@ export const streaks = pgTable("streaks", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   entityId: varchar("entity_id").references(() => entities.id),
   type: text("type").notNull(), // create, business, wellness
+  category: text("category").default("creative"), // creative, business, wellness
   currentStreak: integer("current_streak").notNull().default(0),
   longestStreak: integer("longest_streak").notNull().default(0),
   lastActivityDate: timestamp("last_activity_date"),

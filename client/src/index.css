@@ -220,64 +220,64 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 220 15% 15%;
+  --background: 20 14% 4%;
 
-  --foreground: 210 20% 90%;
+  --foreground: 45 25% 91%;
 
-  --border: 220 15% 25%;
+  --border: 220 15% 20%;
 
-  --card: 220 15% 18%;
+  --card: 20 14% 8%;
 
-  --card-foreground: 210 20% 90%;
+  --card-foreground: 45 25% 91%;
 
   --card-border: 220 15% 25%;
 
-  --sidebar: 220 15% 18%;
+  --sidebar: 20 14% 6%;
 
-  --sidebar-foreground: 210 20% 90%;
+  --sidebar-foreground: 45 25% 91%;
 
-  --sidebar-border: 220 15% 25%;
+  --sidebar-border: 220 15% 20%;
 
-  --sidebar-primary: 220 90% 56%;
+  --sidebar-primary: 9 75% 61%;
 
-  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-primary-foreground: 45 25% 91%;
 
-  --sidebar-accent: 220 30% 25%;
+  --sidebar-accent: 220 15% 15%;
 
-  --sidebar-accent-foreground: 210 20% 90%;
+  --sidebar-accent-foreground: 45 25% 85%;
 
-  --sidebar-ring: 220 90% 56%;
+  --sidebar-ring: 9 75% 61%;
 
-  --popover: 220 15% 15%;
+  --popover: 20 14% 8%;
 
-  --popover-foreground: 210 20% 90%;
+  --popover-foreground: 45 25% 91%;
 
   --popover-border: 220 15% 25%;
 
-  --primary: 220 90% 56%;
+  --primary: 9 75% 61%;
 
-  --primary-foreground: 0 0% 100%;
+  --primary-foreground: 45 25% 91%;
 
-  --secondary: 220 15% 30%;
+  --secondary: 30 15% 52%;
 
-  --secondary-foreground: 210 20% 90%;
+  --secondary-foreground: 45 25% 91%;
 
-  --muted: 220 15% 25%;
+  --muted: 220 15% 15%;
 
-  --muted-foreground: 210 15% 60%;
+  --muted-foreground: 45 15% 65%;
 
-  --accent: 220 30% 25%;
+  --accent: 220 15% 20%;
 
-  --accent-foreground: 210 20% 90%;
+  --accent-foreground: 45 25% 85%;
 
   --destructive: 356 91% 54%;
 
-  --destructive-foreground: 0 0% 100%;
+  --destructive-foreground: 45 25% 91%;
 
   --input: 20 14% 18%;
   --ring: 9 75% 61%;
-  --chart-1: 204 88% 53%;
-  --chart-2: 160 100% 36%;
+  --chart-1: 160 100% 36%;
+  --chart-2: 280 75% 55%;
   --chart-3: 42 93% 56%;
   --chart-4: 147 79% 42%;
   --chart-5: 341 75% 51%;

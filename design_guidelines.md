@@ -1,81 +1,93 @@
 # ArtOverwatch Design Guidelines
 
 ## Design Approach
-**Apple Human Interface Guidelines (HIG) Adaptation** - Following Apple's design principles for a clean, content-focused experience that translates well from native iOS to web. Emphasizing clarity, deference, and depth.
+**Apple Human Interface Guidelines (HIG) Adaptation** - Following Apple's design principles for a clean, content-focused iOS-style interface with dark backgrounds, vibrant accent colors, and polished spacing. Emphasizing clarity, deference, and depth with modern dark UI aesthetics.
 
 ## Core Design Elements
 
 ### A. Color Palette
-**Primary Colors:**
-- Light Mode: 210 100% 95% (light blue-gray background), 220 15% 25% (dark text)
-- Dark Mode: 220 15% 15% (dark background), 210 20% 90% (light text)
+**Dark Mode Primary (Default):**
+- Background: 20 14% 4% (rich dark brown-black)
+- Card: 20 14% 8% (elevated dark surfaces)
+- Foreground: 45 25% 91% (warm white text)
+- Primary: 9 75% 61% (vibrant coral-red for CTAs)
+- Secondary: 30 15% 52% (muted warm gray)
 
-**Brand Colors:**
-- Primary: 220 90% 56% (vibrant blue for CTAs and highlights)
-- Success: 142 76% 36% (green for positive actions)
-- Warning: 38 92% 50% (amber for alerts)
+**Light Mode:**
+- Background: 45 25% 97% (warm off-white)
+- Card: 0 0% 6% (dark cards on light)
+- Primary: 0 0% 96% (light gray for buttons)
+- Foreground: 0 0% 6% (dark text)
 
-**Corporate Aesthetic:**
-- Professional gradient overlays using subtle blue-to-purple transitions (220 90% 56% to 250 80% 60%)
-- Clean, high-contrast interface emphasizing trust and reliability
+**Chart Colors:**
+- Chart-1: 204 88% 53% (vibrant blue)
+- Chart-2: 160 100% 36% (emerald green)
+- Chart-3: 42 93% 56% (golden yellow)
+- Chart-4: 147 79% 42% (forest green)
+- Chart-5: 341 75% 51% (magenta pink)
 
 ### B. Typography
-**Primary Font:** SF Pro Display (system font) with fallbacks to -apple-system, BlinkMacSystemFont
-- Headers: 600 weight, sizes from 2.5rem to 1.125rem
-- Body: 400 weight, 1rem base size, 1.6 line height
+**Primary Font:** Inter with fallbacks to system fonts
+- Headers: 600 weight, 2.5rem to 1.125rem range
+- Body: 400 weight, 1rem base, 1.6 line height
 - Captions: 500 weight, 0.875rem for metadata
+- Mono: Menlo for code elements
 
 ### C. Layout System
 **Tailwind Spacing:** Primary units of 4, 6, 8, 12, 16
-- Consistent padding: p-6 for cards, p-8 for main containers
-- Margins: mb-8 for section separation, mb-4 for component spacing
-- Grid gaps: gap-6 for card layouts, gap-4 for form elements
+- Card padding: p-6 for standard cards, p-8 for main containers
+- Section margins: mb-8 for separation, mb-4 for components
+- Grid gaps: gap-6 for layouts, gap-4 for forms
+- Border radius: 0.4rem (rounded-md equivalent)
 
 ### D. Component Library
 
 **Navigation:**
-- Clean tab bar with SF Symbols-inspired icons
-- Minimal top navigation with clear hierarchy
-- Sidebar navigation for desktop with collapsible sections
+- Dark sidebar with coral-red primary accent (9 75% 61%)
+- Pill-shaped category buttons with subtle backgrounds
+- Clean iOS-style tab navigation with proper touch targets
 
-**Cards & Containers:**
-- Subtle shadows and rounded corners (rounded-lg)
-- Card-based layout for projects, IP assets, and financial data
-- Glass morphism effects for overlay components
+**Cards & Progress:**
+- Dark elevated cards (20 14% 8%) with subtle borders
+- Circular progress rings in vibrant colors (green 160 100% 36%, purple 280 75% 55%)
+- Clean typography hierarchy within cards
 
-**Forms:**
-- Clean, floating label inputs
-- Grouped form sections with clear visual separation
-- Minimal button styles with emphasis on primary actions
+**Forms & Inputs:**
+- Dark input fields (20 14% 18%) with warm borders
+- Floating labels and grouped sections
+- Primary coral-red buttons for main actions
 
 **Data Displays:**
-- Clean tables with subtle borders
-- Card-based metrics with prominent numbers
-- Simple charts focusing on clarity over decoration
+- Clean dark tables with warm accent borders
+- Card-based metrics with prominent colorful numbers
+- Simple charts using defined chart color palette
 
-**Overlays:**
-- Modal dialogs with backdrop blur
-- Sheet-style bottom panels for mobile
-- Minimal popover menus
+**Interactive Elements:**
+- Hover states with subtle opacity changes
+- Focus rings using primary coral-red color
+- Minimal shadows for depth without distraction
 
 ### E. Animations
-**Minimal Motion:**
-- Subtle fade transitions (200ms ease)
-- Gentle scale transforms for interactive elements
-- No complex animations - focus on smooth, purposeful micro-interactions
+**iOS-Style Motion:**
+- Subtle 200ms ease transitions
+- Gentle scale transforms (0.95-1.0) for touch feedback
+- Smooth fade-ins for progressive disclosure
+- No complex animations - focus on polished micro-interactions
 
 ## Key Design Principles
 
-1. **Corporate Professionalism:** Clean, trustworthy interface that conveys business capability
-2. **Content-First:** Information hierarchy prioritizes artist data and project details
-3. **Mobile-Responsive:** iOS-optimized touch targets and gestures
-4. **Accessibility:** High contrast ratios and clear visual hierarchy
-5. **Scalability:** Modular components that work across different screen sizes
+1. **iOS Dark Aesthetic:** Rich dark backgrounds with vibrant accent colors
+2. **Professional Polish:** Clean spacing and typography conveying business capability  
+3. **Content-First:** Information hierarchy prioritizing artist data and metrics
+4. **Touch-Optimized:** Proper sizing and spacing for mobile interactions
+5. **High Contrast:** Excellent readability with warm whites on dark surfaces
+6. **Vibrant Accents:** Strategic use of coral-red primary and colorful chart elements
 
 ## Images
-**Hero Section:** Large hero image showcasing artistic workspace or creative tools, with blurred background overlay buttons using backdrop-blur
-**Project Cards:** Thumbnail images for artwork and projects
-**Profile Areas:** Artist profile photos and brand logo displays
-**Dashboard Icons:** Clean, minimal icons for different business functions (treasury, IP, projects)
+**No Large Hero Image:** This interface focuses on dashboard-style layouts with cards and data visualization rather than large hero sections
+**Profile Elements:** Small circular artist profile photos within cards
+**Project Thumbnails:** Square artwork thumbnails in grid layouts  
+**Icon Elements:** Clean system-style icons throughout the interface
+**Background Patterns:** Subtle dark textures or gradients to add depth without distraction
 
-This design creates a professional platform that feels both artistic and business-capable, following Apple's design philosophy while serving the unique needs of creative entrepreneurs.
+This design creates a sophisticated, iOS-inspired platform that feels both artistic and business-focused, using rich dark themes with strategic pops of vibrant color for an engaging creative professional experience.

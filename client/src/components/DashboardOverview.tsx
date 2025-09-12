@@ -1,147 +1,213 @@
-import { BarChart3, DollarSign, FolderOpen, Shield, TrendingUp, Users } from "lucide-react";
-import MetricsCard from "./MetricsCard";
+import { BarChart3, DollarSign, FolderOpen, Shield, TrendingUp, Users, Play, Pause } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import heroImage from "@assets/generated_images/Artist_workspace_hero_image_c69ecf2d.png";
+import CircularProgress from "./CircularProgress";
+import CategoryPill from "./CategoryPill";
 import sampleArt from "@assets/generated_images/Sample_artwork_thumbnail_ebf97e2a.png";
 
 export default function DashboardOverview() {
-  //todo: remove mock functionality - this data should come from the backend
-  const mockMetrics = [
-    { title: "Total Revenue", value: "R695,420", change: "+20.1% from last month", changeType: "positive" as const, icon: DollarSign },
-    { title: "Active Projects", value: "12", change: "+2 this week", changeType: "positive" as const, icon: FolderOpen },
-    { title: "IP Assets", value: "67", change: "3 pending with CIPC", changeType: "neutral" as const, icon: Shield },
-    { title: "Community Members", value: "1,284", change: "+5.4% growth", changeType: "positive" as const, icon: Users },
+  const categories = [
+    { label: "Creative", active: true },
+    { label: "Business", active: false },
+    { label: "180 BPM", active: false, variant: "accent" as const },
   ];
 
-  const mockProjects = [
-    { name: "Mzansi Digital Art Collection", status: "In Progress", revenue: "R189,600", completion: 75 },
-    { name: "Ubuntu Brand Identity", status: "Review", revenue: "R136,200", completion: 90 },
-    { name: "African Heritage NFT Series", status: "Planning", revenue: "R0", completion: 25 },
+  const projectData = [
+    {
+      name: "Shuddam Ga",
+      subtitle: "Yaman",
+      progress: 84,
+      color: "hsl(var(--chart-1))",
+      isPlaying: false
+    },
+    {
+      name: "16 Beats",
+      subtitle: "Teentaal",
+      progress: 6,
+      color: "hsl(var(--chart-2))",
+      isPlaying: true
+    }
+  ];
+
+  const controlItems = [
+    { label: "Tanpura", color: "hsl(var(--chart-1))" },
+    { label: "Surpeti", color: "hsl(var(--chart-1))" },
+    { label: "Swarmandal", color: "hsl(var(--chart-1))" },
+    { label: "Fills", color: "hsl(var(--chart-1))" },
+  ];
+
+  const rhythmItems = [
+    { label: "Tabla", color: "hsl(var(--chart-2))" },
+    { label: "Manjira", color: "hsl(var(--chart-2))" },
+    { label: "Ghungroo", color: "hsl(var(--chart-2))" },
+    { label: "Fills", color: "hsl(var(--chart-2))" },
   ];
 
   return (
-    <div className="space-y-8">
-      {/* Hero Section */}
-      <div 
-        className="relative h-64 rounded-lg overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative h-full flex items-center justify-center text-center text-white p-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-2" data-testid="text-hero-title">
-              Welcome to your creative corporation
-            </h1>
-            <p className="text-xl text-white/90 mb-6">
-              Your corporate IP portfolio has grown 20% this month across all entities
-            </p>
-            <Button size="lg" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30" data-testid="button-explore-projects">
-              Explore Projects
-            </Button>
+    <div className="space-y-6 p-6 min-h-screen">
+      {/* Status Bar Style Header */}
+      <div className="flex items-center justify-between text-sm text-muted-foreground mb-6">
+        <div className="flex items-center gap-4">
+          <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+            <div className="w-2 h-2 rounded-full bg-primary"></div>
           </div>
+          <span className="font-medium">00:01:26</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-2 bg-chart-1 rounded-sm"></div>
+          <div className="w-4 h-2 bg-chart-1 rounded-sm"></div>
+          <div className="w-4 h-2 bg-chart-1 rounded-sm"></div>
+          <div className="w-6 h-3 bg-chart-1 rounded-sm"></div>
         </div>
       </div>
 
-      {/* Metrics Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {mockMetrics.map((metric, index) => (
-          <MetricsCard key={index} {...metric} />
+      {/* Category Pills */}
+      <div className="flex gap-3 mb-8">
+        {categories.map((category, index) => (
+          <CategoryPill 
+            key={index} 
+            active={category.active}
+            variant={category.variant}
+          >
+            {category.label}
+          </CategoryPill>
         ))}
       </div>
 
-      {/* Recent Projects */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <FolderOpen className="h-5 w-5" />
-              Recent Projects
-            </CardTitle>
-            <CardDescription>
-              Track your active creative projects and their progress
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {mockProjects.map((project, index) => (
-                <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover-elevate" data-testid={`card-project-${index}`}>
-                  <div className="space-y-1">
-                    <h4 className="font-semibold">{project.name}</h4>
-                    <div className="flex items-center gap-2">
-                      <Badge variant={project.status === "In Progress" ? "default" : project.status === "Review" ? "secondary" : "outline"}>
-                        {project.status}
-                      </Badge>
-                      <span className="text-sm text-muted-foreground">{project.completion}% complete</span>
-                    </div>
+      {/* Main Content Grid */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Left Column - Project Circles */}
+        <div className="space-y-8">
+          {projectData.map((project, index) => (
+            <Card key={index} className="p-6" data-testid={`card-project-${index}`}>
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground">{project.name}</h3>
+                  <p className="text-sm text-muted-foreground flex items-center gap-2">
+                    {project.subtitle}
+                    <span className="text-primary">→</span>
+                  </p>
+                </div>
+                <div className="text-4xl font-bold text-muted-foreground">
+                  {project.progress}
+                </div>
+              </div>
+              
+              <CircularProgress
+                percentage={project.progress}
+                size={160}
+                strokeWidth={12}
+                color={project.color}
+                className="mx-auto"
+              >
+                <div className="text-center">
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="w-12 h-12 rounded-full bg-muted/50 hover:bg-muted"
+                  >
+                    {project.isPlaying ? (
+                      <Pause className="w-6 h-6" />
+                    ) : (
+                      <Play className="w-6 h-6 ml-1" />
+                    )}
+                  </Button>
+                </div>
+              </CircularProgress>
+            </Card>
+          ))}
+        </div>
+
+        {/* Right Column - Controls */}
+        <div className="space-y-6">
+          {/* MELODY Section */}
+          <Card className="p-4">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="text-sm font-medium text-muted-foreground tracking-wide">MELODY</h4>
+              <div className="flex gap-1">
+                <div className="w-1 h-6 bg-chart-1 rounded-full"></div>
+                <div className="w-1 h-6 bg-chart-1/50 rounded-full"></div>
+                <div className="w-1 h-6 bg-chart-1/30 rounded-full"></div>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <Button size="icon" variant="ghost" className="w-10 h-10 rounded-full bg-chart-1/20 hover:bg-chart-1/30" data-testid="button-melody-play">
+                <Pause className="w-5 h-5 text-chart-1" />
+              </Button>
+              <span className="text-sm font-medium">Play</span>
+            </div>
+            
+            <div className="space-y-2">
+              {controlItems.map((item, index) => (
+                <div key={index} className="flex items-center justify-between py-2">
+                  <div className="flex items-center gap-3">
+                    <Button size="icon" variant="ghost" className="w-8 h-8 rounded-full bg-chart-1/20">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
+                    </Button>
+                    <span className="text-sm">{item.label}</span>
                   </div>
-                  <div className="text-right">
-                    <div className="font-semibold">{project.revenue}</div>
-                    <div className="text-sm text-muted-foreground">Revenue</div>
-                  </div>
+                  <div className="w-1 h-12 bg-chart-1 rounded-full"></div>
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Quick Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>
-              Manage your creative business efficiently
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <Button className="w-full justify-start" variant="outline" data-testid="button-register-ip">
-              <Shield className="mr-2 h-4 w-4" />
-              Register New IP
-            </Button>
-            <Button className="w-full justify-start" variant="outline" data-testid="button-create-project">
-              <FolderOpen className="mr-2 h-4 w-4" />
-              Create Project
-            </Button>
-            <Button className="w-full justify-start" variant="outline" data-testid="button-view-analytics">
-              <BarChart3 className="mr-2 h-4 w-4" />
-              View Analytics
-            </Button>
-            <Button className="w-full justify-start" variant="outline" data-testid="button-manage-revenue">
-              <TrendingUp className="mr-2 h-4 w-4" />
-              Manage Revenue
-            </Button>
-          </CardContent>
-        </Card>
+          </Card>
+          
+          {/* RHYTHM Section */}
+          <Card className="p-4">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="text-sm font-medium text-muted-foreground tracking-wide">RHYTHM</h4>
+              <div className="flex gap-1">
+                <div className="w-1 h-6 bg-chart-2 rounded-full"></div>
+                <div className="w-1 h-6 bg-chart-2/50 rounded-full"></div>
+                <div className="w-1 h-6 bg-chart-2/30 rounded-full"></div>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <Button size="icon" variant="ghost" className="w-10 h-10 rounded-full bg-chart-2/20 hover:bg-chart-2/30" data-testid="button-rhythm-play">
+                <Pause className="w-5 h-5 text-chart-2" />
+              </Button>
+              <span className="text-sm font-medium">Play</span>
+            </div>
+            
+            <div className="space-y-2">
+              {rhythmItems.map((item, index) => (
+                <div key={index} className="flex items-center justify-between py-2">
+                  <div className="flex items-center gap-3">
+                    <Button size="icon" variant="ghost" className="w-8 h-8 rounded-full bg-chart-2/20">
+                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
+                    </Button>
+                    <span className="text-sm">{item.label}</span>
+                  </div>
+                  <div className="w-1 h-12 bg-chart-2 rounded-full"></div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
       </div>
 
-      {/* Featured Artwork */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Featured Artwork</CardTitle>
-          <CardDescription>
-            Showcase your latest creative works
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="group relative aspect-video rounded-lg overflow-hidden hover-elevate" data-testid={`image-artwork-${i}`}>
-                <img 
-                  src={sampleArt} 
-                  alt={`Artwork ${i}`}
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <Button variant="secondary" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                    View Details
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {/* Bottom Navigation */}
+      <div className="flex items-center justify-center gap-12 py-6 border-t border-border/50">
+        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-home">
+          <div className="w-6 h-6 rounded bg-foreground/20"></div>
+          <span className="text-xs text-muted-foreground">HOME</span>
+        </Button>
+        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-mixes">
+          <div className="w-6 h-6 rounded bg-foreground/20"></div>
+          <span className="text-xs text-muted-foreground">MIXES</span>
+        </Button>
+        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-keys">
+          <div className="w-6 h-6 rounded bg-foreground/20"></div>
+          <span className="text-xs text-muted-foreground">KEYS</span>
+        </Button>
+        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-help">
+          <div className="w-6 h-6 rounded bg-foreground/20"></div>
+          <span className="text-xs text-muted-foreground">HELP</span>
+        </Button>
+      </div>
     </div>
   );
 }

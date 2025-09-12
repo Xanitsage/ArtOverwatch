@@ -13,6 +13,12 @@ import TreasuryDashboard from "@/components/TreasuryDashboard";
 import ProjectManager from "@/components/ProjectManager";
 import BrandingStudio from "@/components/BrandingStudio";
 import UserProfile from "@/components/UserProfile";
+import TreasuryAccounts from "@/pages/TreasuryAccounts";
+import TreasuryTransfers from "@/pages/TreasuryTransfers";
+import TreasuryPayments from "@/pages/TreasuryPayments";
+import StudioDashboard from "@/pages/StudioDashboard";
+import StudioSessions from "@/pages/StudioSessions";
+import StudioGoals from "@/pages/StudioGoals";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -21,13 +27,25 @@ function Router() {
       <Route path="/" component={DashboardOverview} />
       <Route path="/ownership" component={CorporateOwnership} />
       <Route path="/ip" component={IPManagement} />
-      <Route path="/treasury" component={TreasuryDashboard} />
       <Route path="/projects" component={ProjectManager} />
       <Route path="/branding" component={BrandingStudio} />
       <Route path="/analytics" component={DashboardOverview} />
       <Route path="/community" component={DashboardOverview} />
       <Route path="/contracts" component={DashboardOverview} />
       <Route path="/legal" component={DashboardOverview} />
+      
+      {/* Treasury Suite */}
+      <Route path="/treasury" component={TreasuryAccounts} />
+      <Route path="/treasury/accounts" component={TreasuryAccounts} />
+      <Route path="/treasury/transfers" component={TreasuryTransfers} />
+      <Route path="/treasury/payments" component={TreasuryPayments} />
+      
+      {/* Studio Suite */}
+      <Route path="/studio" component={StudioDashboard} />
+      <Route path="/studio/dashboard" component={StudioDashboard} />
+      <Route path="/studio/sessions" component={StudioSessions} />
+      <Route path="/studio/goals" component={StudioGoals} />
+      
       <Route path="/settings" component={UserProfile} />
       <Route component={NotFound} />
     </Switch>

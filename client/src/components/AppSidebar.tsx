@@ -1,4 +1,7 @@
-import { BarChart3, Briefcase, Brush, DollarSign, FolderOpen, Home, Palette, Settings, Shield, Users } from "lucide-react";
+import { 
+  BarChart3, Briefcase, Brush, DollarSign, FolderOpen, Home, Palette, Settings, Shield, Users,
+  Building, ArrowLeftRight, CreditCard, Target, Timer, TrendingUp, Play
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -12,18 +15,36 @@ import {
 } from "@/components/ui/sidebar";
 import { useLocation } from "wouter";
 
-const menuItems = [
+const overviewItems = [
   { title: "Dashboard", url: "/", icon: Home },
+  { title: "Analytics", url: "/analytics", icon: BarChart3 },
+];
+
+const corporateItems = [
   { title: "Ownership", url: "/ownership", icon: Briefcase },
   { title: "IP Management", url: "/ip", icon: Shield },
-  { title: "Treasury", url: "/treasury", icon: DollarSign },
   { title: "Projects", url: "/projects", icon: FolderOpen },
-  { title: "Branding", url: "/branding", icon: Palette },
-  { title: "Analytics", url: "/analytics", icon: BarChart3 },
   { title: "Community", url: "/community", icon: Users },
 ];
 
+const entityItems = [
+  { title: "Entity Overview", url: "/entities", icon: Building },
+];
+
+const treasuryItems = [
+  { title: "Accounts", url: "/treasury/accounts", icon: DollarSign },
+  { title: "Transfers", url: "/treasury/transfers", icon: ArrowLeftRight },
+  { title: "Payments", url: "/treasury/payments", icon: CreditCard },
+];
+
+const studioItems = [
+  { title: "Dashboard", url: "/studio/dashboard", icon: Target },
+  { title: "Sessions", url: "/studio/sessions", icon: Timer },
+  { title: "Goals & Streaks", url: "/studio/goals", icon: TrendingUp },
+];
+
 const businessItems = [
+  { title: "Branding", url: "/branding", icon: Palette },
   { title: "Contracts", url: "/contracts", icon: Briefcase },
   { title: "Legal", url: "/legal", icon: Shield },
   { title: "Settings", url: "/settings", icon: Settings },
@@ -46,11 +67,12 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       <SidebarContent>
+        {/* Overview Section */}
         <SidebarGroup>
-          <SidebarGroupLabel>Creative Enterprise</SidebarGroupLabel>
+          <SidebarGroupLabel>Overview</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {menuItems.map((item) => (
+              {overviewItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
@@ -67,7 +89,100 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* Corporate Section */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Corporate</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {corporateItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={location === item.url}
+                    data-testid={`link-${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    <a href={item.url}>
+                      <item.icon className="w-4 h-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Entities Section */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Entities</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {entityItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={location.startsWith("/entities")}
+                    data-testid={`link-${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    <a href={item.url}>
+                      <item.icon className="w-4 h-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Treasury Section */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Treasury</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {treasuryItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={location === item.url}
+                    data-testid={`link-treasury-${item.title.toLowerCase()}`}
+                  >
+                    <a href={item.url}>
+                      <item.icon className="w-4 h-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Studio Section */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Studio</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {studioItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={location === item.url}
+                    data-testid={`link-studio-${item.title.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-')}`}
+                  >
+                    <a href={item.url}>
+                      <item.icon className="w-4 h-4" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
         
+        {/* Business Operations Section */}
         <SidebarGroup>
           <SidebarGroupLabel>Business Operations</SidebarGroupLabel>
           <SidebarGroupContent>

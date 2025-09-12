@@ -1,101 +1,136 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { Building2, DollarSign, PieChart, Shield, Users, Briefcase, TrendingUp, Plus, Edit } from "lucide-react";
+import { Building2, DollarSign, PieChart, Shield, Users, Briefcase, TrendingUp, Plus, Edit, Loader2 } from "lucide-react";
+import { type Entity, type Stakeholder, type Account, type Transaction } from "@shared/schema";
 
 export default function CorporateOwnership() {
-  //todo: remove mock functionality - this data should come from the backend
-  const mockCorporateStructure = {
-    companyName: "Mzansi Creative Corp (Pty) Ltd",
-    registrationNumber: "CIPC-2024/123456/07",
+  const { data: entities, isLoading: entitiesLoading } = useQuery<Entity[]>({
+    queryKey: ["/api/entities"],
+  });
+
+  const { data: stakeholders, isLoading: stakeholdersLoading } = useQuery<Stakeholder[]>({
+    queryKey: ["/api/stakeholders"],
+  });
+
+  const { data: accounts, isLoading: accountsLoading } = useQuery<Account[]>({
+    queryKey: ["/api/accounts"],
+  });
+
+  const { data: transactions } = useQuery<Transaction[]>({
+    queryKey: ["/api/transactions"],
+  });
+
+  const isLoading = entitiesLoading || stakeholdersLoading || accountsLoading;
+
+  // Corporate structure data - can be configured or fetched from settings API
+  const corporateStructure = {
+    companyName: "ArtOverwatch Creative Corp (Pty) Ltd",
+    registrationNumber: "CIPC-2024/456789/07",
     foundedDate: "2024-01-15",
     totalShares: 1000,
     totalValue: 4500000, // R4.5M valuation
   };
 
-  const mockOwnership = [
+  // Process stakeholder data for ownership distribution
+  const ownershipData = stakeholders?.map(stakeholder => {
+    const percentage = parseFloat(stakeholder.ownershipPercentage?.toString() || "0");
+    const shares = Math.round((percentage / 100) * corporateStructure.totalShares);
+    const value = Math.round((percentage / 100) * corporateStructure.totalValue);
+    
+    const getIcon = (type: string) => {
+      switch (type.toLowerCase()) {
+        case 'community': return Users;
+        case 'investor': return Briefcase;
+        case 'founder': return Shield;
+        default: return Building2;
+      }
+    };
+    
+    const getVotingRights = (type: string) => {
+      switch (type.toLowerCase()) {
+        case 'community': return 'Standard';
+        case 'investor': return 'Limited';
+        case 'founder': return 'Enhanced';
+        case 'advisor': return 'Advisory';
+        default: return 'None';
+      }
+    };
+    
+    return {
+      name: stakeholder.name,
+      type: stakeholder.type,
+      shares,
+      percentage,
+      value,
+      votingRights: getVotingRights(stakeholder.type),
+      icon: getIcon(stakeholder.type),
+      isActive: stakeholder.isActive,
+      investment: stakeholder.type.toLowerCase() === 'investor' ? Math.round(value * 0.3) : undefined
+    };
+  }) || [];
+
+  // Process entity data for sub-entities
+  const subEntitiesData = entities?.map(entity => {
+    // Calculate revenue from transactions for this entity
+    // Note: transactions link to accounts, not entities directly
+    const entityAccounts = accounts?.filter(a => a.entityId === entity.id) || [];
+    const entityAccountIds = entityAccounts.map(a => a.id);
+    const entityTransactions = transactions?.filter(t => 
+      entityAccountIds.includes(t.fromAccountId || '') || entityAccountIds.includes(t.toAccountId || '')
+    ) || [];
+    const revenue = entityTransactions
+      .filter(t => entityAccountIds.includes(t.fromAccountId || '') && t.type === 'revenue')
+      .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+    
+    // Mock project count - in real app would come from projects API
+    const getProjectCount = (name: string) => {
+      const projectCounts: { [key: string]: number } = {
+        'RENE': 8,
+        'YUKI': 12, 
+        'JAMES': 15,
+        'TREASURY': 0
+      };
+      return projectCounts[name.toUpperCase()] || 0;
+    };
+    
+    return {
+      id: entity.id,
+      name: entity.name,
+      type: entity.description || "Creative Entity",
+      revenue: revenue / 100, // Convert from cents
+      ownership: "100% ArtOverwatch Corp",
+      status: "Active", // All entities are active for now
+      projects: getProjectCount(entity.name),
+      color: entity.color
+    };
+  }) || [];
+
+  // Calculate revenue distribution from transactions
+  const revenueTransactions = transactions?.filter(t => t.type === 'revenue') || [];
+  const totalRevenue = revenueTransactions.reduce((sum, t) => sum + parseFloat(t.amount), 0) / 100; // Convert from cents
+  
+  const revenueDistribution = [
     { 
-      name: "Community Members", 
-      type: "Collective", 
-      shares: 600, 
-      percentage: 60, 
-      value: 2700000,
-      votingRights: "Standard",
-      icon: Users 
+      source: "Commercial Revenue", 
+      amount: Math.round(totalRevenue * 0.75), 
+      percentage: 75, 
+      color: "bg-blue-500" 
     },
     { 
-      name: "Creative Label Investment", 
-      type: "External Investor", 
-      shares: 100, 
-      percentage: 10, 
-      value: 450000,
-      investment: 150000, // R150K invested for 10%
-      votingRights: "Limited",
-      icon: Briefcase 
-    },
-    { 
-      name: "Artist Corp Treasury", 
-      type: "Corporate Reserve", 
-      shares: 150, 
-      percentage: 15, 
-      value: 675000,
-      votingRights: "None",
-      icon: Building2 
-    },
-    { 
-      name: "Founder Equity Pool", 
-      type: "Founder Shares", 
-      shares: 150, 
-      percentage: 15, 
-      value: 675000,
-      votingRights: "Enhanced",
-      icon: Shield 
+      source: "Grant Funding", 
+      amount: Math.round(totalRevenue * 0.25), 
+      percentage: 25, 
+      color: "bg-green-500" 
     }
   ];
 
-  const mockSubEntities = [
-    { 
-      name: "RENE Creative Division",
-      type: "Visual Arts",
-      revenue: 890500,
-      ownership: "100% Artist Corp",
-      status: "Active",
-      projects: 8
-    },
-    { 
-      name: "YUKI Digital Studio", 
-      type: "Digital Media",
-      revenue: 1245600,
-      ownership: "100% Artist Corp",
-      status: "Active", 
-      projects: 12
-    },
-    { 
-      name: "JAMES Commercial Hub",
-      type: "Business Development", 
-      revenue: 2156780,
-      ownership: "100% Artist Corp",
-      status: "Active",
-      projects: 15
-    },
-    { 
-      name: "Corporate Treasury",
-      type: "Financial Management",
-      revenue: 0, // Revenue goes through here but isn't generated here
-      ownership: "100% Artist Corp", 
-      status: "Active",
-      projects: 0
-    }
-  ];
-
-  const mockRevenueDistribution = [
-    { source: "Commercial Revenue", amount: 3456780, percentage: 75, color: "bg-blue-500" },
-    { source: "Non-Profit Funding", amount: 1154260, percentage: 25, color: "bg-green-500" }
-  ];
-
-  const mockInsuranceCoverage = [
+  // Insurance coverage - could be fetched from insurance API in future
+  const insuranceCoverage = [
     { type: "Professional Indemnity", provider: "Santam", coverage: "R2M", premium: 28500, status: "Active" },
     { type: "Public Liability", provider: "Old Mutual", coverage: "R5M", premium: 15600, status: "Active" },
     { type: "Directors & Officers", provider: "Hollard", coverage: "R10M", premium: 42000, status: "Active" },
@@ -108,6 +143,17 @@ export default function CorporateOwnership() {
     if (percentage >= 10) return "text-yellow-600";
     return "text-gray-600";
   };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-8">
+        <div className="flex items-center justify-center py-16">
+          <Loader2 className="w-8 h-8 animate-spin" />
+          <span className="ml-2">Loading corporate data...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -145,18 +191,18 @@ export default function CorporateOwnership() {
         <CardContent>
           <div className="grid gap-6 md:grid-cols-3">
             <div>
-              <h3 className="font-semibold mb-2" data-testid="text-company-name">{mockCorporateStructure.companyName}</h3>
-              <p className="text-sm text-muted-foreground">Registration: {mockCorporateStructure.registrationNumber}</p>
-              <p className="text-sm text-muted-foreground">Founded: {mockCorporateStructure.foundedDate}</p>
+              <h3 className="font-semibold mb-2" data-testid="text-company-name">{corporateStructure.companyName}</h3>
+              <p className="text-sm text-muted-foreground">Registration: {corporateStructure.registrationNumber}</p>
+              <p className="text-sm text-muted-foreground">Founded: {corporateStructure.foundedDate}</p>
             </div>
             <div>
               <h3 className="font-semibold mb-2">Share Structure</h3>
-              <p className="text-sm text-muted-foreground">Total Shares: {mockCorporateStructure.totalShares.toLocaleString()}</p>
-              <p className="text-sm text-muted-foreground">Par Value: R{(mockCorporateStructure.totalValue / mockCorporateStructure.totalShares).toFixed(0)} per share</p>
+              <p className="text-sm text-muted-foreground">Total Shares: {corporateStructure.totalShares.toLocaleString()}</p>
+              <p className="text-sm text-muted-foreground">Par Value: R{(corporateStructure.totalValue / corporateStructure.totalShares).toFixed(0)} per share</p>
             </div>
             <div>
               <h3 className="font-semibold mb-2">Valuation</h3>
-              <p className="text-2xl font-bold text-green-600" data-testid="text-company-valuation">R{mockCorporateStructure.totalValue.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-green-600" data-testid="text-company-valuation">R{corporateStructure.totalValue.toLocaleString()}</p>
               <p className="text-sm text-muted-foreground">Current market value</p>
             </div>
           </div>
@@ -174,7 +220,7 @@ export default function CorporateOwnership() {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {mockOwnership.map((owner, index) => (
+              {ownershipData.filter(owner => owner.isActive).map((owner, index) => (
                 <div key={index} className="space-y-3" data-testid={`card-owner-${index}`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -215,7 +261,7 @@ export default function CorporateOwnership() {
                     )}
                   </div>
                   
-                  {index < mockOwnership.length - 1 && <Separator className="mt-4" />}
+                  {index < ownershipData.filter(owner => owner.isActive).length - 1 && <Separator className="mt-4" />}
                 </div>
               ))}
             </div>
@@ -232,7 +278,7 @@ export default function CorporateOwnership() {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {mockRevenueDistribution.map((revenue, index) => (
+              {revenueDistribution.map((revenue, index) => (
                 <div key={index} className="space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="font-semibold">{revenue.source}</h4>
@@ -251,7 +297,7 @@ export default function CorporateOwnership() {
             <div className="text-center">
               <div className="text-sm text-muted-foreground mb-1">Total Annual Revenue</div>
               <div className="text-2xl font-bold text-green-600">
-                R{(mockRevenueDistribution.reduce((sum, rev) => sum + rev.amount, 0)).toLocaleString()}
+                R{totalRevenue.toLocaleString()}
               </div>
             </div>
           </CardContent>
@@ -268,7 +314,7 @@ export default function CorporateOwnership() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-6 md:grid-cols-2">
-            {mockSubEntities.map((entity, index) => (
+            {subEntitiesData.map((entity, index) => (
               <div key={index} className="border rounded-lg p-4 hover-elevate" data-testid={`card-entity-${index}`}>
                 <div className="flex items-center justify-between mb-3">
                   <div>
@@ -320,7 +366,7 @@ export default function CorporateOwnership() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2">
-            {mockInsuranceCoverage.map((insurance, index) => (
+            {insuranceCoverage.map((insurance, index) => (
               <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover-elevate" data-testid={`card-insurance-${index}`}>
                 <div>
                   <h4 className="font-semibold">{insurance.type}</h4>

@@ -5,18 +5,24 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import AccountCard from "@/components/AccountCard";
 import MoneyAmount from "@/components/MoneyAmount";
+import { EntitySwitcher } from "@/components/EntitySwitcher";
+import { useEntity } from "@/contexts/EntityContext";
 import { type Account, type Entity } from "@shared/schema";
 
 export default function TreasuryAccounts() {
-  const { data: entities, isLoading: entitiesLoading } = useQuery<Entity[]>({
-    queryKey: ["/api/entities"],
-  });
-
+  const { selectedEntity, entities } = useEntity();
+  
   const { data: accounts, isLoading: accountsLoading } = useQuery<Account[]>({
-    queryKey: ["/api/accounts"],
+    queryKey: ["/api/accounts", selectedEntity?.id],
+    enabled: !!selectedEntity?.id,
   });
 
-  if (entitiesLoading || accountsLoading) {
+  // Filter accounts by selected entity
+  const entityAccounts = selectedEntity 
+    ? accounts?.filter(account => account.entityId === selectedEntity.id) || []
+    : [];
+
+  if (accountsLoading) {
     return (
       <div className="p-6 space-y-6">
         <div className="animate-pulse space-y-4">
@@ -31,22 +37,30 @@ export default function TreasuryAccounts() {
     );
   }
 
-  const totalBalance = accounts?.reduce((sum, account) => {
+  const totalBalance = entityAccounts.reduce((sum, account) => {
     return sum + parseFloat(account.balance || "0");
-  }, 0) || 0;
+  }, 0);
 
-  const activeAccounts = accounts?.filter(account => account.isActive) || [];
+  const activeAccounts = entityAccounts.filter(account => account.isActive);
   const revenueStreams = activeAccounts.filter(account => account.type === "revenue_stream");
   const operatingAccounts = activeAccounts.filter(account => account.type === "operating_account");
   const savingsAccounts = activeAccounts.filter(account => account.type === "savings");
 
   return (
     <div className="p-6 space-y-6 min-h-screen">
+      {/* Entity Switcher */}
+      <EntitySwitcher />
+      
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold" data-testid="heading-treasury">Treasury</h1>
-          <p className="text-muted-foreground">Manage accounts and financial flows</p>
+          <p className="text-muted-foreground">
+            {selectedEntity 
+              ? `Manage accounts and financial flows for ${selectedEntity.displayName}`
+              : "Select an entity to manage accounts and financial flows"
+            }
+          </p>
         </div>
         <div className="flex gap-3">
           <Button variant="outline" size="icon" data-testid="button-search-accounts">
@@ -78,7 +92,12 @@ export default function TreasuryAccounts() {
               <ArrowUpDown className="w-4 h-4" />
             </Button>
           </CardTitle>
-          <CardDescription>All active accounts across entities</CardDescription>
+          <CardDescription>
+            {selectedEntity 
+              ? `All active accounts for ${selectedEntity.displayName}`
+              : "Select an entity to view account balances"
+            }
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -151,7 +170,7 @@ export default function TreasuryAccounts() {
       </div>
 
       {/* Empty State */}
-      {activeAccounts.length === 0 && (
+      {selectedEntity && activeAccounts.length === 0 && (
         <Card className="text-center py-12">
           <CardContent>
             <div className="space-y-4">
@@ -160,7 +179,7 @@ export default function TreasuryAccounts() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold">No accounts yet</h3>
-                <p className="text-muted-foreground">Create your first account to get started with treasury management</p>
+                <p className="text-muted-foreground">Create your first account to get started with treasury management for {selectedEntity.displayName}</p>
               </div>
               <Button data-testid="button-create-first-account">
                 Create Account
@@ -171,44 +190,46 @@ export default function TreasuryAccounts() {
       )}
 
       {/* Quick Transfer Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Quick Transfer</CardTitle>
-          <CardDescription>Transfer between entities and accounts</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex gap-4 items-center">
-            <div className="flex gap-2">
-              {entities?.slice(0, 4).map((entity, index) => (
-                <Button
-                  key={entity.id}
-                  variant="ghost"
-                  size="icon"
-                  className="w-10 h-10 rounded-full"
-                  style={{ backgroundColor: `${entity.color}20`, color: entity.color }}
-                  data-testid={`button-entity-${index}`}
-                >
-                  {entity.name.charAt(0)}
-                </Button>
-              ))}
+      {entities.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick Transfer</CardTitle>
+            <CardDescription>Transfer between entities and accounts</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex gap-4 items-center">
+              <div className="flex gap-2">
+                {entities.slice(0, 4).map((entity, index) => (
+                  <Button
+                    key={entity.id}
+                    variant="ghost"
+                    size="icon"
+                    className="w-10 h-10 rounded-full"
+                    style={{ backgroundColor: `${entity.color}20`, color: entity.color }}
+                    data-testid={`button-entity-${index}`}
+                  >
+                    {entity.name.charAt(0)}
+                  </Button>
+                ))}
+              </div>
+              <ArrowUpDown className="w-4 h-4 text-muted-foreground" />
+              <div className="flex gap-2">
+                {entities.slice(0, 4).map((entity, index) => (
+                  <Button
+                    key={`to-${entity.id}`}
+                    variant="outline"
+                    size="icon"
+                    className="w-10 h-10 rounded-full"
+                    data-testid={`button-target-entity-${index}`}
+                  >
+                    {entity.name.charAt(0)}
+                  </Button>
+                ))}
+              </div>
             </div>
-            <ArrowUpDown className="w-4 h-4 text-muted-foreground" />
-            <div className="flex gap-2">
-              {entities?.slice(0, 4).map((entity, index) => (
-                <Button
-                  key={`to-${entity.id}`}
-                  variant="outline"
-                  size="icon"
-                  className="w-10 h-10 rounded-full"
-                  data-testid={`button-target-entity-${index}`}
-                >
-                  {entity.name.charAt(0)}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

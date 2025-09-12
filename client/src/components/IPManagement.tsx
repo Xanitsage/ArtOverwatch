@@ -14,47 +14,47 @@ export default function IPManagement() {
   const mockIPAssets = [
     {
       id: 1,
-      title: "Abstract Harmony Series",
+      title: "Ubuntu Digital Art Series",
       type: "Artwork",
       status: "Registered",
       registrationDate: "2024-01-15",
       expiryDate: "2034-01-15",
-      registrationNumber: "VA0002345678",
-      description: "Collection of 12 abstract digital paintings",
-      value: "$25,000"
+      registrationNumber: "CIPC-VA0002345678",
+      description: "Collection of 12 African-inspired digital paintings",
+      value: "R382,500"
     },
     {
       id: 2,
-      title: "ArtFlow Brand Identity",
+      title: "Mzansi Creative Corp Identity",
       type: "Trademark",
       status: "Pending",
       registrationDate: "2024-02-20",
       expiryDate: "2034-02-20",
-      registrationNumber: "TM0009876543",
-      description: "Logo, wordmark, and brand guidelines",
-      value: "$15,000"
+      registrationNumber: "CIPC-TM0009876543",
+      description: "Corporate logo, wordmark, and brand guidelines",
+      value: "R229,500"
     },
     {
       id: 3,
-      title: "Creative Process Documentation",
+      title: "African Creative Heritage Docs",
       type: "Copyright",
       status: "Draft",
       registrationDate: "2024-03-10",
       expiryDate: "2094-03-10",
-      registrationNumber: "CR0001234567",
-      description: "Video series documenting artistic process",
-      value: "$8,500"
+      registrationNumber: "CIPC-CR0001234567",
+      description: "Video series documenting South African artistic traditions",
+      value: "R130,050"
     },
     {
       id: 4,
-      title: "Digital Art Toolkit",
+      title: "Afrocentric Digital Toolkit",
       type: "Software",
       status: "Registered",
       registrationDate: "2024-01-05",
       expiryDate: "2029-01-05",
-      registrationNumber: "SW0004567890",
-      description: "Custom brushes and digital art tools",
-      value: "$12,000"
+      registrationNumber: "CIPC-SW0004567890",
+      description: "Custom African pattern brushes and cultural design tools",
+      value: "R183,600"
     }
   ];
 
@@ -90,7 +90,7 @@ export default function IPManagement() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">IP Management</h1>
           <p className="text-muted-foreground">
-            Protect and manage your intellectual property assets
+            Protect and manage your corporate IP assets under South African law
           </p>
         </div>
         <Button data-testid="button-register-new-ip">
@@ -146,7 +146,7 @@ export default function IPManagement() {
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$284K</div>
+            <div className="text-2xl font-bold">R4.35M</div>
             <p className="text-xs text-muted-foreground">
               Estimated total value
             </p>

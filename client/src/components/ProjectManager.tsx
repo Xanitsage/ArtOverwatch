@@ -16,62 +16,62 @@ export default function ProjectManager() {
   const mockProjects = [
     {
       id: 1,
-      title: "Digital Art Collection",
-      description: "Series of 20 abstract digital paintings for gallery exhibition",
+      title: "Mzansi Heritage Collection",
+      description: "Series of 20 African-inspired digital artworks for Johannesburg gallery exhibition",
       status: "In Progress",
       priority: "High",
       progress: 75,
       startDate: "2024-01-15",
       endDate: "2024-04-15",
-      budget: 25000,
-      spent: 18750,
-      team: ["Sarah Chen", "Michael Rodriguez"],
-      client: "Modern Art Gallery",
+      budget: 382500,
+      spent: 286875,
+      team: ["Nomsa Dlamini", "Thabo Motaung"],
+      client: "Goodman Gallery",
       category: "Artwork"
     },
     {
       id: 2,
-      title: "Brand Identity Package",
-      description: "Complete rebrand including logo, website, and marketing materials",
+      title: "Ubuntu Corporate Identity",
+      description: "Complete corporate rebrand reflecting African values and heritage",
       status: "Review",
       priority: "Medium",
       progress: 90,
       startDate: "2024-02-01",
       endDate: "2024-03-30",
-      budget: 15000,
-      spent: 13200,
-      team: ["Alex Thompson"],
-      client: "TechStart Inc",
+      budget: 229500,
+      spent: 201960,
+      team: ["Sipho Mahlangu"],
+      client: "Standard Bank SA",
       category: "Branding"
     },
     {
       id: 3,
-      title: "NFT Series Launch",
-      description: "10-piece NFT collection with smart contracts and marketplace integration",
+      title: "African Heritage NFT Launch",
+      description: "15-piece NFT collection celebrating South African cultural diversity",
       status: "Planning",
       priority: "High",
       progress: 25,
       startDate: "2024-03-01",
       endDate: "2024-05-15",
-      budget: 30000,
-      spent: 5000,
-      team: ["Jordan Kim", "Sam Wilson"],
-      client: "CryptoArt Platform",
+      budget: 459000,
+      spent: 76500,
+      team: ["Lerato Mokwena", "Dumisani Ndlovu"],
+      client: "SA Cultural Foundation",
       category: "Digital Assets"
     },
     {
       id: 4,
-      title: "Video Content Creation",
-      description: "Educational video series about digital art techniques",
+      title: "Afrocentric Design Tutorials",
+      description: "Educational video series showcasing traditional African design patterns",
       status: "Completed",
       priority: "Low",
       progress: 100,
       startDate: "2023-12-01",
       endDate: "2024-02-28",
-      budget: 8000,
-      spent: 7850,
-      team: ["Emma Davis"],
-      client: "Online Learning Platform",
+      budget: 122400,
+      spent: 120105,
+      team: ["Zanele Mthembu"],
+      client: "University of Cape Town",
       category: "Content"
     }
   ];
@@ -152,7 +152,7 @@ export default function ProjectManager() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$186K</div>
+            <div className="text-2xl font-bold">R2.85M</div>
             <p className="text-xs text-muted-foreground">
               Across all projects
             </p>
@@ -259,11 +259,11 @@ export default function ProjectManager() {
                     </div>
                     <div>
                       <div className="font-medium text-muted-foreground">Budget</div>
-                      <div className="font-semibold">${project.budget.toLocaleString()}</div>
+                      <div className="font-semibold">R{project.budget.toLocaleString()}</div>
                     </div>
                     <div>
                       <div className="font-medium text-muted-foreground">Spent</div>
-                      <div className="font-semibold text-blue-600">${project.spent.toLocaleString()}</div>
+                      <div className="font-semibold text-blue-600">R{project.spent.toLocaleString()}</div>
                     </div>
                   </div>
 

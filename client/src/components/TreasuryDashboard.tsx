@@ -9,28 +9,28 @@ export default function TreasuryDashboard() {
 
   //todo: remove mock functionality - this data should come from the backend
   const mockFinancials = {
-    totalBalance: 148250,
-    monthlyRevenue: 45231,
-    monthlyExpenses: 28450,
-    netIncome: 16781,
+    totalBalance: 2268950,
+    monthlyRevenue: 692540,
+    monthlyExpenses: 435890,
+    netIncome: 256650,
     revenueGrowth: 12.5,
     expenseChange: -5.2
   };
 
   const mockTransactions = [
-    { id: 1, type: "income", amount: 8500, description: "Digital Art Commission", date: "2024-03-15", client: "Acme Corp" },
-    { id: 2, type: "expense", amount: -1200, description: "Software Subscriptions", date: "2024-03-14", client: "Adobe" },
-    { id: 3, type: "income", amount: 15000, description: "NFT Collection Sale", date: "2024-03-12", client: "OpenSea" },
-    { id: 4, type: "expense", amount: -850, description: "Marketing Campaign", date: "2024-03-10", client: "Meta Ads" },
-    { id: 5, type: "income", amount: 5200, description: "Licensing Fee", date: "2024-03-08", client: "Creative Studio" },
-    { id: 6, type: "expense", amount: -2400, description: "Equipment Purchase", date: "2024-03-05", client: "Wacom" },
+    { id: 1, type: "income", amount: 130150, description: "Mzansi Art Commission", date: "2024-03-15", client: "Sasol Corp" },
+    { id: 2, type: "expense", amount: -18360, description: "Creative Software Suite", date: "2024-03-14", client: "Adobe SA" },
+    { id: 3, type: "income", amount: 229500, description: "African Heritage NFT Sale", date: "2024-03-12", client: "OpenSea" },
+    { id: 4, type: "expense", amount: -13005, description: "Digital Marketing ZA", date: "2024-03-10", client: "Google Ads SA" },
+    { id: 5, type: "income", amount: 79560, description: "Licensing Fee - SABC", date: "2024-03-08", client: "SABC Creative" },
+    { id: 6, type: "expense", amount: -36720, description: "Equipment Purchase", date: "2024-03-05", client: "Wacom SA" },
   ];
 
   const mockRevenueStreams = [
-    { source: "Commissions", amount: 18500, percentage: 41, change: "+15%" },
-    { source: "NFT Sales", amount: 15000, percentage: 33, change: "+22%" },
-    { source: "Licensing", amount: 8200, percentage: 18, change: "+8%" },
-    { source: "Courses", amount: 3531, percentage: 8, change: "-3%" },
+    { source: "Corporate Commissions", amount: 283250, percentage: 41, change: "+15%" },
+    { source: "African Heritage NFTs", amount: 229500, percentage: 33, change: "+22%" },
+    { source: "Licensing & IP", amount: 125460, percentage: 18, change: "+8%" },
+    { source: "Non-Profit Funding", amount: 54024, percentage: 8, change: "+12%" },
   ];
 
   return (
@@ -64,7 +64,7 @@ export default function TreasuryDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold" data-testid="text-total-balance">
-              ${mockFinancials.totalBalance.toLocaleString()}
+              R{mockFinancials.totalBalance.toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">
               Available funds
@@ -79,7 +79,7 @@ export default function TreasuryDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-600">
-              ${mockFinancials.monthlyRevenue.toLocaleString()}
+              R{mockFinancials.monthlyRevenue.toLocaleString()}
             </div>
             <p className="text-xs text-green-600 flex items-center">
               <ArrowUpRight className="h-3 w-3 mr-1" />
@@ -95,7 +95,7 @@ export default function TreasuryDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-red-600">
-              ${mockFinancials.monthlyExpenses.toLocaleString()}
+              R{mockFinancials.monthlyExpenses.toLocaleString()}
             </div>
             <p className="text-xs text-green-600 flex items-center">
               <ArrowDownRight className="h-3 w-3 mr-1" />
@@ -111,7 +111,7 @@ export default function TreasuryDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${mockFinancials.netIncome.toLocaleString()}
+              R{mockFinancials.netIncome.toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">
               This month
@@ -141,7 +141,7 @@ export default function TreasuryDashboard() {
                         {stream.change}
                       </Badge>
                     </div>
-                    <div className="text-2xl font-bold">${stream.amount.toLocaleString()}</div>
+                    <div className="text-2xl font-bold">R{stream.amount.toLocaleString()}</div>
                     <div className="text-sm text-muted-foreground">{stream.percentage}% of total revenue</div>
                   </div>
                 </div>
@@ -177,7 +177,7 @@ export default function TreasuryDashboard() {
                     </div>
                   </div>
                   <div className={`font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
-                    {transaction.type === 'income' ? '+' : ''}${Math.abs(transaction.amount).toLocaleString()}
+                    {transaction.type === 'income' ? '+' : ''}R{Math.abs(transaction.amount).toLocaleString()}
                   </div>
                 </div>
               ))}

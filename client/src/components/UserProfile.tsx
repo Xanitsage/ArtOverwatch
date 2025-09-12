@@ -12,20 +12,20 @@ import artistPhoto from "@assets/generated_images/Artist_profile_photo_25c5d1e0.
 export default function UserProfile() {
   //todo: remove mock functionality - this data should come from the backend
   const mockProfile = {
-    name: "Alexandra Chen",
-    username: "@alexart",
-    title: "Digital Artist & Creative Director",
-    bio: "Passionate about creating meaningful digital experiences through art and design. Specializing in abstract digital paintings and brand identity work.",
-    location: "San Francisco, CA",
-    website: "alexchen.art",
+    name: "Nomsa Dlamini",
+    username: "@nomsacreates",
+    title: "Creative Director & Corporate Artist",
+    bio: "Passionate about celebrating African heritage through contemporary digital art and corporate design. Specializing in cultural fusion and brand identity that reflects ubuntu values.",
+    location: "Cape Town, Western Cape",
+    website: "nomsacreates.co.za",
     joinDate: "January 2022",
     followers: 1284,
     following: 892,
     stats: {
       totalProjects: 47,
-      totalRevenue: 284000,
+      totalRevenue: 4347600,
       ipAssets: 67,
-      avgProjectValue: 6043
+      avgProjectValue: 92501
     }
   };
 
@@ -142,7 +142,7 @@ export default function UserProfile() {
               <CardContent>
                 <div className="text-2xl font-bold" data-testid="text-total-projects">{mockProfile.stats.totalProjects}</div>
                 <p className="text-xs text-muted-foreground">
-                  Avg. value: ${mockProfile.stats.avgProjectValue.toLocaleString()}
+                  Avg. value: R{mockProfile.stats.avgProjectValue.toLocaleString()}
                 </p>
               </CardContent>
             </Card>
@@ -153,7 +153,7 @@ export default function UserProfile() {
                 <BarChart3 className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-green-600">${mockProfile.stats.totalRevenue.toLocaleString()}</div>
+                <div className="text-2xl font-bold text-green-600">R{mockProfile.stats.totalRevenue.toLocaleString()}</div>
                 <p className="text-xs text-muted-foreground">
                   Lifetime earnings
                 </p>

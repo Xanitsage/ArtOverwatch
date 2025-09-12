@@ -9,16 +9,16 @@ import sampleArt from "@assets/generated_images/Sample_artwork_thumbnail_ebf97e2
 export default function DashboardOverview() {
   //todo: remove mock functionality - this data should come from the backend
   const mockMetrics = [
-    { title: "Total Revenue", value: "$45,231", change: "+20.1% from last month", changeType: "positive" as const, icon: DollarSign },
+    { title: "Total Revenue", value: "R695,420", change: "+20.1% from last month", changeType: "positive" as const, icon: DollarSign },
     { title: "Active Projects", value: "12", change: "+2 this week", changeType: "positive" as const, icon: FolderOpen },
-    { title: "IP Assets", value: "67", change: "3 pending registration", changeType: "neutral" as const, icon: Shield },
+    { title: "IP Assets", value: "67", change: "3 pending with CIPC", changeType: "neutral" as const, icon: Shield },
     { title: "Community Members", value: "1,284", change: "+5.4% growth", changeType: "positive" as const, icon: Users },
   ];
 
   const mockProjects = [
-    { name: "Digital Art Collection", status: "In Progress", revenue: "$12,400", completion: 75 },
-    { name: "Brand Identity Package", status: "Review", revenue: "$8,900", completion: 90 },
-    { name: "NFT Series Launch", status: "Planning", revenue: "$0", completion: 25 },
+    { name: "Mzansi Digital Art Collection", status: "In Progress", revenue: "R189,600", completion: 75 },
+    { name: "Ubuntu Brand Identity", status: "Review", revenue: "R136,200", completion: 90 },
+    { name: "African Heritage NFT Series", status: "Planning", revenue: "R0", completion: 25 },
   ];
 
   return (
@@ -32,10 +32,10 @@ export default function DashboardOverview() {
         <div className="relative h-full flex items-center justify-center text-center text-white p-8">
           <div>
             <h1 className="text-4xl font-bold mb-2" data-testid="text-hero-title">
-              Welcome back to your creative enterprise
+              Welcome to your creative corporation
             </h1>
             <p className="text-xl text-white/90 mb-6">
-              Your IP portfolio has grown 20% this month
+              Your corporate IP portfolio has grown 20% this month across all entities
             </p>
             <Button size="lg" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30" data-testid="button-explore-projects">
               Explore Projects

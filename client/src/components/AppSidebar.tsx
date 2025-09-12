@@ -14,6 +14,7 @@ import { useLocation } from "wouter";
 
 const menuItems = [
   { title: "Dashboard", url: "/", icon: Home },
+  { title: "Ownership", url: "/ownership", icon: Briefcase },
   { title: "IP Management", url: "/ip", icon: Shield },
   { title: "Treasury", url: "/treasury", icon: DollarSign },
   { title: "Projects", url: "/projects", icon: FolderOpen },

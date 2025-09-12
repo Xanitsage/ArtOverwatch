@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import ThemeToggle from "@/components/ThemeToggle";
 import DashboardOverview from "@/components/DashboardOverview";
+import CorporateOwnership from "@/components/CorporateOwnership";
 import IPManagement from "@/components/IPManagement";
 import TreasuryDashboard from "@/components/TreasuryDashboard";
 import ProjectManager from "@/components/ProjectManager";
@@ -18,6 +19,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={DashboardOverview} />
+      <Route path="/ownership" component={CorporateOwnership} />
       <Route path="/ip" component={IPManagement} />
       <Route path="/treasury" component={TreasuryDashboard} />
       <Route path="/projects" component={ProjectManager} />

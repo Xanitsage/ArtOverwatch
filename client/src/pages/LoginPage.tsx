@@ -78,14 +78,14 @@ export default function LoginPage() {
             <div className="absolute -inset-2 rounded-full bg-primary/10 blur-sm"></div>
             <img 
               src={appIcon} 
-              alt="Art Overwatch Logo" 
+              alt="The Grid Atelier Logo" 
               className="h-20 w-20 relative z-10"
               data-testid="login-logo"
             />
           </div>
           <h1 className="text-3xl font-bold tracking-tight mb-2">Sign in</h1>
           <p className="text-sm text-muted-foreground max-w-xs">
-            Enter your credentials to access your Art Overwatch account
+            Enter your credentials to access The Grid Atelier platform
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export default function LoginPage() {
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password" className="text-sm font-medium text-foreground/90 pl-0.5">Password</Label>
                   <Button 
-                    variant="link" 
+                    variant="ghost" 
                     className="p-0 h-auto text-xs text-primary/80 hover:text-primary font-medium transition-colors" 
                     onClick={() => navigate("/forgot-password")}
                   >
@@ -175,7 +175,7 @@ export default function LoginPage() {
         <div className="text-center text-sm mt-6">
           <span className="text-muted-foreground">Don't have an account? </span>
           <Button 
-            variant="link" 
+            variant="ghost" 
             className="p-0 h-auto text-primary font-medium hover:text-primary/80" 
             onClick={() => navigate("/signup")}
           >

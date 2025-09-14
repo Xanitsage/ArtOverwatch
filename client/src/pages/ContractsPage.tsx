@@ -14,7 +14,7 @@ export default function ContractsPage() {
       </div>
       
       <p className="text-muted-foreground">
-        Manage all contracts and agreements for your Artist Corporation.
+        Manage all contracts and agreements for The Grid Atelier collective.
       </p>
       
       <div className="flex items-center justify-between">

@@ -12,7 +12,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Health check endpoint
   app.get("/api", async (req, res) => {
     try {
-      res.json({ message: "ArtOverwatch API is working", version: "1.0.0" });
+      res.json({ message: "The Grid Atelier API is working", version: "1.0.0" });
     } catch (error) {
       console.error("Health check error:", error);
       res.status(500).json({ error: "Internal server error" });

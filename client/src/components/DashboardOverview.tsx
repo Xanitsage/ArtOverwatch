@@ -20,7 +20,7 @@ export default function DashboardOverview() {
   const projectData = [
     {
       name: "Gallery Exhibition",
-      subtitle: "Artist Corp",
+      subtitle: "The Grid Atelier",
       progress: 84,
       color: "hsl(var(--chart-1))",
       isPlaying: false

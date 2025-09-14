@@ -1,4 +1,4 @@
-# ArtOverwatch UI Enhancement Changes
+# The Grid Atelier UI Enhancement Changes
 
 ## Animation and UI Improvements
 

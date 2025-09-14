@@ -61,11 +61,11 @@ export function AppSidebar() {
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg">Q</span>
+            <span className="text-primary-foreground font-bold text-lg">G</span>
           </div>
           <div>
-            <h1 className="font-semibold text-lg" data-testid="text-app-title">Quadra Vision</h1>
-            <p className="text-xs text-muted-foreground">Full control. Full vision.</p>
+            <h1 className="font-semibold text-lg" data-testid="text-app-title">The Grid Atelier</h1>
+            <p className="text-xs text-muted-foreground">Precision. Creativity. Collective.</p>
           </div>
         </div>
       </SidebarHeader>

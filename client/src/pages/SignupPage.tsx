@@ -85,13 +85,13 @@ export default function SignupPage() {
           
           <img 
             src={appIcon} 
-            alt="Art Overwatch Logo" 
+            alt="The Grid Atelier Logo" 
             className="h-16 w-16 mb-4"
             data-testid="signup-logo"
           />
           <h1 className="text-2xl font-bold tracking-tight">Create your account</h1>
           <p className="text-sm text-muted-foreground">
-            Join Art Overwatch to manage your creative business
+            Join The Grid Atelier to manage your creative collective
           </p>
         </div>
 
@@ -156,7 +156,7 @@ export default function SignupPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox id="terms" required />
                 <Label htmlFor="terms" className="text-sm font-normal">
-                  I agree to the <Button variant="link" className="p-0 h-auto">Terms of Service</Button> and <Button variant="link" className="p-0 h-auto">Privacy Policy</Button>
+                  I agree to the <Button variant="ghost" className="p-0 h-auto">Terms of Service</Button> and <Button variant="ghost" className="p-0 h-auto">Privacy Policy</Button>
                 </Label>
               </div>
             </CardContent>
@@ -197,7 +197,7 @@ export default function SignupPage() {
         <div className="text-center text-sm">
           <span className="text-muted-foreground">Already have an account? </span>
           <Button 
-            variant="link" 
+            variant="ghost" 
             className="p-0 h-auto" 
             onClick={() => navigate("/login")}
           >

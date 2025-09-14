@@ -29,7 +29,7 @@ export default function CorporateOwnership() {
 
   // Corporate structure data - can be configured or fetched from settings API
   const corporateStructure = {
-    companyName: "Quadra Vision Creative Nexus (Pty) Ltd",
+    companyName: "The Grid Atelier Collective (Pty) Ltd",
     registrationNumber: "CIPC-2024/456789/07",
     foundedDate: "2024-01-15",
     totalShares: 1000,
@@ -103,7 +103,7 @@ export default function CorporateOwnership() {
       name: entity.name,
       type: entity.description || "Creative Entity",
       revenue: revenue / 100, // Convert from cents
-      ownership: "100% ArtOverwatch Corp",
+      ownership: "100% The Grid Atelier",
       status: "Active", // All entities are active for now
       projects: getProjectCount(entity.name),
       color: entity.color
@@ -185,7 +185,7 @@ export default function CorporateOwnership() {
             Corporate Structure
           </CardTitle>
           <CardDescription>
-            Artist Corporation registered under South African Companies Act
+            Creative Collective registered under South African Companies Act
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -273,7 +273,7 @@ export default function CorporateOwnership() {
           <CardHeader>
             <CardTitle>Revenue Distribution</CardTitle>
             <CardDescription>
-              Income streams flowing to Artist Corp
+              Income streams flowing to The Grid Atelier
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -309,7 +309,7 @@ export default function CorporateOwnership() {
         <CardHeader>
           <CardTitle>Sub-Entity Management</CardTitle>
           <CardDescription>
-            Wholly-owned subsidiaries under Artist Corp
+            Wholly-owned subsidiaries under The Grid Atelier
           </CardDescription>
         </CardHeader>
         <CardContent>

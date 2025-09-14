@@ -11,7 +11,7 @@ export default function LegalPage() {
       </div>
       
       <p className="text-muted-foreground">
-        Important legal information for Artist Corp members, partners, and stakeholders.
+        Important legal information for The Grid Atelier members, partners, and stakeholders.
       </p>
       
       <Tabs defaultValue="terms" className="w-full">
@@ -33,12 +33,12 @@ export default function LegalPage() {
             <CardContent className="space-y-4">
               <h3 className="text-lg font-medium">1. Agreement to Terms</h3>
               <p>
-                By accessing or using the Quadra Vision platform, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this platform.
+                By accessing or using The Grid Atelier platform, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this platform.
               </p>
               
               <h3 className="text-lg font-medium">2. Use License</h3>
               <p>
-                Permission is granted to temporarily access the materials on Quadra Vision's platform for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.
+                Permission is granted to temporarily access the materials on The Grid Atelier's platform for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.
               </p>
               
               <h3 className="text-lg font-medium">3. Creative Nexus Structure</h3>
@@ -48,12 +48,12 @@ export default function LegalPage() {
               
               <h3 className="text-lg font-medium">4. Treasury Management</h3>
               <p>
-                Users are responsible for all financial activities conducted through the Treasury features. Art Overwatch provides tools for transparency and management but does not guarantee financial outcomes or provide financial advice.
+                Users are responsible for all financial activities conducted through the Treasury features. The Grid Atelier provides tools for transparency and management but does not guarantee financial outcomes or provide financial advice.
               </p>
               
               <h3 className="text-lg font-medium">5. Termination</h3>
               <p>
-                Art Overwatch may terminate or suspend access to our platform immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
+                The Grid Atelier may terminate or suspend access to our platform immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
               </p>
             </CardContent>
           </Card>
@@ -107,12 +107,12 @@ export default function LegalPage() {
             <CardContent className="space-y-4">
               <h3 className="text-lg font-medium">1. Copyright Protection</h3>
               <p>
-                All content included on this platform, such as text, graphics, logos, images, audio clips, digital downloads, and data compilations, is the property of Art Overwatch or its content suppliers and protected by international copyright laws.
+                All content included on this platform, such as text, graphics, logos, images, audio clips, digital downloads, and data compilations, is the property of The Grid Atelier or its content suppliers and protected by international copyright laws.
               </p>
               
               <h3 className="text-lg font-medium">2. User-Generated Content</h3>
               <p>
-                By uploading content to the platform, you grant Art Overwatch a non-exclusive, royalty-free, transferable, sub-licensable, worldwide license to use, store, display, reproduce, modify, create derivative works, perform, and distribute your content on Art Overwatch solely for the purposes of operating, developing, and improving our services.
+                By uploading content to the platform, you grant The Grid Atelier a non-exclusive, royalty-free, transferable, sub-licensable, worldwide license to use, store, display, reproduce, modify, create derivative works, perform, and distribute your content on The Grid Atelier solely for the purposes of operating, developing, and improving our services.
               </p>
               
               <h3 className="text-lg font-medium">3. DMCA Compliance</h3>
@@ -122,12 +122,12 @@ export default function LegalPage() {
               
               <h3 className="text-lg font-medium">4. IP Rights Management</h3>
               <p>
-                The platform provides tools for managing intellectual property rights within the Artist Corporation structure. Users are responsible for ensuring proper rights management and compliance with applicable laws.
+                The platform provides tools for managing intellectual property rights within The Grid Atelier structure. Users are responsible for ensuring proper rights management and compliance with applicable laws.
               </p>
               
               <h3 className="text-lg font-medium">5. Fair Use</h3>
               <p>
-                Art Overwatch respects the intellectual property of others and asks users to do the same. Fair use of copyrighted material is permitted in accordance with applicable copyright laws.
+                The Grid Atelier respects the intellectual property of others and asks users to do the same. Fair use of copyrighted material is permitted in accordance with applicable copyright laws.
               </p>
             </CardContent>
           </Card>
@@ -144,7 +144,7 @@ export default function LegalPage() {
             <CardContent className="space-y-4">
               <h3 className="text-lg font-medium">1. Regulatory Compliance</h3>
               <p>
-                Art Overwatch is committed to complying with all applicable laws and regulations. We maintain appropriate policies and procedures to ensure compliance with relevant legal requirements.
+                The Grid Atelier is committed to complying with all applicable laws and regulations. We maintain appropriate policies and procedures to ensure compliance with relevant legal requirements.
               </p>
               
               <h3 className="text-lg font-medium">2. Financial Reporting</h3>
@@ -159,7 +159,7 @@ export default function LegalPage() {
               
               <h3 className="text-lg font-medium">4. Anti-Money Laundering</h3>
               <p>
-                Art Overwatch implements measures to prevent money laundering and terrorist financing. Users are required to provide accurate information and may be subject to verification procedures.
+                The Grid Atelier implements measures to prevent money laundering and terrorist financing. Users are required to provide accurate information and may be subject to verification procedures.
               </p>
               
               <h3 className="text-lg font-medium">5. Reporting Violations</h3>

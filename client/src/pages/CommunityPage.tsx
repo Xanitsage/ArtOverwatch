@@ -26,7 +26,7 @@ export default function CommunityPage() {
           <Card>
             <CardHeader>
               <CardTitle>Active Members</CardTitle>
-              <CardDescription>Members of your Artist Corporation</CardDescription>
+              <CardDescription>Members of The Grid Atelier collective</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">

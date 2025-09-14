@@ -1,8 +1,8 @@
-# ArtOverwatch - Creative Enterprise Platform
+# The Grid Atelier - Creative Collective Platform
 
 ## Overview
 
-ArtOverwatch is a comprehensive creative enterprise platform designed to empower visual artists by providing them with corporate-grade tools to manage their entire creative business. The application serves as a unified platform for idea incubation, IP protection, revenue tracking, branding, treasury management, and community building. Built with a modern React frontend and Express backend, the platform emphasizes clean design following Apple's Human Interface Guidelines and provides a professional, corporate aesthetic for creative professionals.
+The Grid Atelier is a comprehensive creative collective platform designed to empower creators by providing them with precision tools to manage their entire creative practice. The application serves as a unified platform for idea incubation, IP protection, revenue tracking, branding, treasury management, and community building. Built with a modern React frontend and Express backend, the platform emphasizes clean quadratic design following strict 8px grid principles and provides a minimalist, monochrome aesthetic for creative professionals.
 
 ## User Preferences
 

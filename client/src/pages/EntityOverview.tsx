@@ -47,10 +47,10 @@ export default function EntityOverview() {
       </div>
 
       <Card className="overflow-hidden">
-        <CardHeader className="p-6" style={{ backgroundColor: `${selectedEntity.color}10` }}>
-          <div className="flex items-center gap-4">
+        <CardHeader className="p-6">
+          <div className="flex items-center gap-4" style={{ backgroundColor: `${selectedEntity.color}10` }}>
             <div className="p-3 rounded-lg" style={{ backgroundColor: `${selectedEntity.color}20` }}>
-              <IconComponent className="w-6 h-6" style={{ color: selectedEntity.color }} />
+              <div style={{ color: selectedEntity.color }}><IconComponent className="w-6 h-6" /></div>
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export default function EntityOverview() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{selectedEntity.stakeholderCount || 5}</div>
+                    <div className="text-2xl font-bold">5</div>
                     <p className="text-xs text-muted-foreground">Active contributors</p>
                   </CardContent>
                 </Card>
@@ -96,7 +96,7 @@ export default function EntityOverview() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{selectedEntity.foundedDate || "2023"}</div>
+                    <div className="text-2xl font-bold">2023</div>
                     <p className="text-xs text-muted-foreground">Establishment year</p>
                   </CardContent>
                 </Card>
@@ -109,7 +109,7 @@ export default function EntityOverview() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{selectedEntity.projectCount || 12}</div>
+                    <div className="text-2xl font-bold">12</div>
                     <p className="text-xs text-muted-foreground">Active projects</p>
                   </CardContent>
                 </Card>
@@ -124,7 +124,7 @@ export default function EntityOverview() {
                     {selectedEntity.description || 
                       `${selectedEntity.displayName} is a creative entity focused on ${getEntityDescription(selectedEntity.name).toLowerCase()}. 
                       The entity was established to drive innovation and excellence in its domain while maintaining 
-                      strong collaborative relationships with other entities in the Quadra Vision ecosystem.`}
+                      strong collaborative relationships with other entities in The Grid Atelier collective.`}
                   </p>
                 </CardContent>
               </Card>

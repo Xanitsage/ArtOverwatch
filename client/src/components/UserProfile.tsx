@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { BarChart3, Calendar, Edit, Globe, Instagram, LogOut, MapPin, Twitter, Users } from "lucide-react";
-import artistPhoto from "@assets/base_img/profile-photo.png";
+import creatorPhoto from "@assets/base_img/profile-photo.png";
 import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
@@ -17,7 +17,7 @@ export default function UserProfile() {
   const mockProfile = {
     name: "Nomsa Dlamini",
     username: "@nomsacreates",
-    title: "Creative Director & Corporate Artist",
+    title: "Creative Director & Grid Professional",
     bio: "Passionate about celebrating African heritage through contemporary digital art and corporate design. Specializing in cultural fusion and brand identity that reflects ubuntu values.",
     location: "Cape Town, Western Cape",
     website: "nomsacreates.co.za",
@@ -68,7 +68,7 @@ export default function UserProfile() {
             <CardContent className="pt-6">
               <div className="text-center">
                 <Avatar className="w-24 h-24 mx-auto mb-4">
-                  <AvatarImage src={artistPhoto} alt={mockProfile.name} />
+                  <AvatarImage src={creatorPhoto} alt={mockProfile.name} />
                   <AvatarFallback>AC</AvatarFallback>
                 </Avatar>
                 

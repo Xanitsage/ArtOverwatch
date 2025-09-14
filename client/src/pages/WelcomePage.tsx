@@ -36,15 +36,15 @@ export default function WelcomePage() {
       <div className="flex flex-col items-center justify-center px-4 py-12 text-center md:px-6 md:py-24">
         <img 
           src={appIcon} 
-          alt="Art Overwatch Logo" 
+          alt="The Grid Atelier Logo" 
           className="h-24 w-24 mb-6"
           data-testid="welcome-logo"
         />
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          Welcome to Art Overwatch
+          Welcome to The Grid Atelier
         </h1>
         <p className="mt-4 max-w-[42rem] text-xl text-muted-foreground">
-          A unified platform giving artists the operational power of a corporation.
+          A unified platform giving creators the operational power of a collective.
         </p>
         <div className="mt-8 flex flex-col gap-4 sm:flex-row">
           <Button 
@@ -87,7 +87,7 @@ export default function WelcomePage() {
             Ready to take control of your creative business?
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Join thousands of artists who have transformed their creative practice with Art Overwatch.
+            Join thousands of creators who have transformed their creative practice with The Grid Atelier.
           </p>
           <Button 
             size="lg" 

@@ -35,17 +35,17 @@ export default function LaunchScreen() {
           <div className="absolute -inset-8 rounded-full bg-primary/5 animate-pulse delay-300 blur-2xl"></div>
           <img 
             src={appIcon} 
-            alt="Quadra Vision Logo" 
+            alt="The Grid Atelier Logo" 
             className="h-40 w-40 relative z-10 animate-bounce-slow"
             data-testid="launch-logo"
           />
         </div>
         <div className="space-y-3 text-center">
           <h1 className="text-4xl font-bold tracking-tight animate-fade-in">
-            Art Overwatch
+            The Grid Atelier
           </h1>
           <p className="text-lg text-muted-foreground animate-fade-in delay-300">
-            Full control. Full vision.
+            Precision. Creativity. Collective.
           </p>
         </div>
       </div>

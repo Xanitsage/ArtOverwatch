@@ -11,7 +11,7 @@ export default function AnalyticsPage() {
       </div>
       
       <p className="text-muted-foreground">
-        Track performance metrics and insights for your Artist Corporation.
+        Track performance metrics and insights for The Grid Atelier collective.
       </p>
       
       <Tabs defaultValue="overview" className="w-full">
@@ -61,7 +61,7 @@ export default function AnalyticsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Performance Overview</CardTitle>
-              <CardDescription>Monthly performance metrics for your Artist Corporation</CardDescription>
+              <CardDescription>Monthly performance metrics for The Grid Atelier collective</CardDescription>
             </CardHeader>
             <CardContent className="h-80">
               <div className="flex items-center justify-center h-full text-muted-foreground">

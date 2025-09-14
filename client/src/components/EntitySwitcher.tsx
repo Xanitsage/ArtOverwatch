@@ -7,11 +7,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { ChevronDown, Building2, Loader2, Palette, Cpu, Briefcase, Banknote } from "lucide-react";
+import { ChevronDown, ChevronUp, Building2, Loader2, Palette, Cpu, Briefcase, Banknote } from "lucide-react";
 import { useEntity } from "@/contexts/EntityContext";
+import { useState } from "react";
 
 export function EntitySwitcher() {
   const { selectedEntity, setSelectedEntity, entities, isLoading } = useEntity();
+  const [showFullText, setShowFullText] = useState(false);
 
   if (isLoading) {
     return (
@@ -77,9 +79,22 @@ export function EntitySwitcher() {
                   Active
                 </Badge>
               </div>
-              <p className="text-sm text-muted-foreground">
-                {getEntityDescription(selectedEntity.name)}
-              </p>
+              <div className="flex items-start gap-1">
+                <p className={`text-sm text-muted-foreground flex-1 ${!showFullText ? 'overflow-hidden whitespace-nowrap text-ellipsis' : ''}`}>
+                  {getEntityDescription(selectedEntity.name)}
+                </p>
+                <button 
+                  onClick={() => setShowFullText(!showFullText)} 
+                  className="p-1 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0 mt-[-2px]"
+                  aria-label={showFullText ? "Show less" : "Show more"}
+                >
+                  {showFullText ? (
+                    <ChevronUp className="h-3.5 w-3.5" />
+                  ) : (
+                    <ChevronDown className="h-3.5 w-3.5" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
           

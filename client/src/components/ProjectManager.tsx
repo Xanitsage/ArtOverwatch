@@ -6,11 +6,15 @@ import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock, DollarSign, FolderOpen, Plus, Search, Users, Eye, Edit } from "lucide-react";
 import { useState } from "react";
-import sampleArt from "@assets/generated_images/Sample_artwork_thumbnail_ebf97e2a.png";
+import sampleArt from "@assets/base_img/artwork-thumb.png";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ProjectManager() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   //todo: remove mock functionality - this data should come from the backend
   const mockProjects = [
@@ -107,15 +111,18 @@ export default function ProjectManager() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">Project Manager</h1>
-          <p className="text-muted-foreground">
-            Track and manage your creative projects from concept to completion
-          </p>
-        </div>
-        <Button data-testid="button-create-project">
-          <Plus className="mr-2 h-4 w-4" />
-          Create Project
-        </Button>
+        <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">Project Manager</h1>
+        <p className="text-muted-foreground">
+          Track and manage your creative projects from concept to completion
+        </p>
+      </div>
+      <Button 
+        data-testid="button-create-project"
+        onClick={() => navigate("/projects/create")}
+      >
+        <Plus className="mr-2 h-4 w-4" />
+        Create Project
+      </Button>
       </div>
 
       {/* Summary Cards */}
@@ -295,11 +302,23 @@ export default function ProjectManager() {
 
                   {/* Actions */}
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1" data-testid={`button-view-${project.id}`}>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1" 
+                      data-testid={`button-view-${project.id}`}
+                      onClick={() => navigate(`/projects/${project.id}`)}
+                    >
                       <Eye className="h-4 w-4 mr-1" />
                       View
                     </Button>
-                    <Button variant="outline" size="sm" className="flex-1" data-testid={`button-edit-${project.id}`}>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1" 
+                      data-testid={`button-edit-${project.id}`}
+                      onClick={() => navigate(`/projects/${project.id}/edit`)}
+                    >
                       <Edit className="h-4 w-4 mr-1" />
                       Edit
                     </Button>

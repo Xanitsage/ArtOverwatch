@@ -6,10 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { BarChart3, Calendar, Edit, Globe, Instagram, MapPin, Twitter, Users } from "lucide-react";
-import artistPhoto from "@assets/generated_images/Artist_profile_photo_25c5d1e0.png";
+import { BarChart3, Calendar, Edit, Globe, Instagram, LogOut, MapPin, Twitter, Users } from "lucide-react";
+import artistPhoto from "@assets/base_img/profile-photo.png";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
+  const navigate = useNavigate();
+  
   //todo: remove mock functionality - this data should come from the backend
   const mockProfile = {
     name: "Nomsa Dlamini",
@@ -256,6 +259,27 @@ export default function UserProfile() {
               <div className="flex gap-3">
                 <Button data-testid="button-save-profile">Save Changes</Button>
                 <Button variant="outline" data-testid="button-cancel-profile">Cancel</Button>
+              </div>
+            </CardContent>
+          </Card>
+          
+          {/* Logout Button */}
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4">
+                <h3 className="text-lg font-medium">Account Actions</h3>
+                <p className="text-sm text-muted-foreground">
+                  Sign out of your account or manage other account settings
+                </p>
+                <Button 
+                  variant="destructive" 
+                  className="w-full flex items-center justify-center gap-2"
+                  onClick={() => navigate("/login")}
+                  data-testid="button-logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Log Out
+                </Button>
               </div>
             </CardContent>
           </Card>

@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Download, Eye, Image, Palette, Plus, Type, Upload } from "lucide-react";
 import { useState } from "react";
-import appIcon from "@assets/generated_images/ArtOverwatch_app_icon_1f115011.png";
+import appIcon from "@assets/base_img/app-icon.png";
 
 export default function BrandingStudio() {
   const [selectedColor, setSelectedColor] = useState("#3B82F6");
@@ -29,7 +29,7 @@ export default function BrandingStudio() {
 
   const mockLogos = [
     { name: "Primary Logo", type: "SVG", size: "2.4 KB", usage: "Main brand mark" },
-    { name: "Logo Mark", type: "PNG", size: "15 KB", usage: "Icon only" },
+    { name: " Mark", type: "PNG", size: "15 KB", usage: "Icon only" },
     { name: "Horizontal Logo", type: "SVG", size: "3.1 KB", usage: "Wide layouts" },
     { name: "Monochrome Logo", type: "SVG", size: "1.8 KB", usage: "Single color use" },
   ];
@@ -85,7 +85,7 @@ export default function BrandingStudio() {
                   alt="Brand Logo" 
                   className="w-16 h-16 mx-auto mb-4"
                 />
-                <p className="text-sm text-muted-foreground">ArtOverwatch</p>
+                <p className="text-sm text-muted-foreground">Quadra Vision</p>
               </div>
             </div>
 

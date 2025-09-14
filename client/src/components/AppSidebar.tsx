@@ -1,7 +1,8 @@
 import { 
-  BarChart3, Briefcase, Brush, DollarSign, FolderOpen, Home, Palette, Settings, Shield, Users,
-  Building, ArrowLeftRight, CreditCard, Target, Timer, TrendingUp, Play
+  BarChart3, Briefcase, DollarSign, FolderOpen, Home, Palette, Settings, Shield, Users,
+  Building, ArrowLeftRight, CreditCard, Target, Timer, TrendingUp, Play, PaintBucket
 } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Sidebar,
   SidebarContent,
@@ -13,10 +14,10 @@ import {
   SidebarMenuItem,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "react-router-dom";
 
 const overviewItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
 ];
 
@@ -25,6 +26,7 @@ const corporateItems = [
   { title: "IP Management", url: "/ip", icon: Shield },
   { title: "Projects", url: "/projects", icon: FolderOpen },
   { title: "Community", url: "/community", icon: Users },
+  { title: "Creative Studio", url: "/creative-studio", icon: Palette },
 ];
 
 const entityItems = [
@@ -41,6 +43,7 @@ const studioItems = [
   { title: "Dashboard", url: "/studio/dashboard", icon: Target },
   { title: "Sessions", url: "/studio/sessions", icon: Timer },
   { title: "Goals & Streaks", url: "/studio/goals", icon: TrendingUp },
+  { title: "Canvas", url: "/studio/canvas", icon: PaintBucket },
 ];
 
 const businessItems = [
@@ -51,17 +54,17 @@ const businessItems = [
 ];
 
 export function AppSidebar() {
-  const [location] = useLocation();
+  const location = useLocation();
 
   return (
     <Sidebar>
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg">A</span>
+            <span className="text-primary-foreground font-bold text-lg">Q</span>
           </div>
           <div>
-            <h1 className="font-semibold text-lg" data-testid="text-app-title">ArtOverwatch</h1>
+            <h1 className="font-semibold text-lg" data-testid="text-app-title">Quadra Vision</h1>
             <p className="text-xs text-muted-foreground">Full control. Full vision.</p>
           </div>
         </div>
@@ -76,13 +79,19 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    isActive={location === item.url}
+                    isActive={location.pathname === item.url}
                     data-testid={`link-${item.title.toLowerCase().replace(' ', '-')}`}
                   >
-                    <a href={item.url}>
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </a>
+                    <Link to={item.url}>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 w-full"
+                      >
+                        <item.icon className="w-4 h-4" style={{display: 'block'}} />
+                        <span>{item.title}</span>
+                      </motion.div>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -99,13 +108,19 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    isActive={location === item.url}
+                    isActive={location.pathname === item.url}
                     data-testid={`link-${item.title.toLowerCase().replace(/\s+/g, '-')}`}
                   >
-                    <a href={item.url}>
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </a>
+                    <Link to={item.url}>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 w-full"
+                      >
+                        <item.icon className="w-4 h-4" style={{display: 'block'}} />
+                        <span>{item.title}</span>
+                      </motion.div>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -122,13 +137,19 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    isActive={location.startsWith("/entities")}
+                    isActive={location.pathname.startsWith("/entities")}
                     data-testid={`link-${item.title.toLowerCase().replace(/\s+/g, '-')}`}
                   >
-                    <a href={item.url}>
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </a>
+                    <Link to={item.url}>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 w-full"
+                      >
+                        <item.icon className="w-4 h-4" style={{display: 'block'}} />
+                        <span>{item.title}</span>
+                      </motion.div>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -145,13 +166,19 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    isActive={location === item.url}
+                    isActive={location.pathname === item.url}
                     data-testid={`link-treasury-${item.title.toLowerCase()}`}
                   >
-                    <a href={item.url}>
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </a>
+                    <Link to={item.url}>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 w-full"
+                      >
+                        <item.icon className="w-4 h-4" style={{display: 'block'}} />
+                        <span>{item.title}</span>
+                      </motion.div>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -168,13 +195,19 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    isActive={location === item.url}
+                    isActive={location.pathname === item.url}
                     data-testid={`link-studio-${item.title.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-')}`}
                   >
-                    <a href={item.url}>
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </a>
+                    <Link to={item.url}>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 w-full"
+                      >
+                        <item.icon className="w-4 h-4" style={{display: 'block'}} />
+                        <span>{item.title}</span>
+                      </motion.div>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -191,13 +224,19 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    isActive={location === item.url}
+                    isActive={location.pathname === item.url}
                     data-testid={`link-${item.title.toLowerCase()}`}
                   >
-                    <a href={item.url}>
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </a>
+                    <Link to={item.url}>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-2 w-full"
+                      >
+                        <item.icon className="w-4 h-4" style={{display: 'block'}} />
+                        <span>{item.title}</span>
+                      </motion.div>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

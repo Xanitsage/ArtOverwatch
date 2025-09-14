@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Play, Pause, Square, Timer, Coffee, Palette, Briefcase, MoreHorizontal } from "lucide-react";
+import { Play, Pause, Square, Timer, Coffee, Palette, Briefcase, MoreHorizontal, Download, Filter, Settings } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,15 @@ import { Slider } from "@/components/ui/slider";
 import CircularProgress from "@/components/CircularProgress";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { type CreativeSession, type Entity, type InsertCreativeSession } from "@shared/schema";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
 
 export default function StudioSessions() {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -21,6 +30,7 @@ export default function StudioSessions() {
   const [sessionMood, setSessionMood] = useState<string>("focused");
   const [sessionIntensity, setSessionIntensity] = useState<string>("medium");
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const { data: entities } = useQuery<Entity[]>({
     queryKey: ["/api/entities"],
@@ -135,9 +145,35 @@ export default function StudioSessions() {
           <h1 className="text-3xl font-bold" data-testid="heading-sessions">Creative Sessions</h1>
           <p className="text-muted-foreground">Focus time tracking and session management</p>
         </div>
-        <Button variant="outline" size="icon" data-testid="button-session-options">
-          <MoreHorizontal className="w-4 h-4" />
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon" data-testid="button-session-options">
+              <MoreHorizontal className="w-4 h-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Session Options</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem 
+              onClick={() => toast({ title: "Export Sessions", description: "Exporting your sessions data" })}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Export Sessions
+            </DropdownMenuItem>
+            <DropdownMenuItem 
+              onClick={() => toast({ title: "Filter Sessions", description: "Opening advanced filter options" })}
+            >
+              <Filter className="w-4 h-4 mr-2" />
+              Advanced Filters
+            </DropdownMenuItem>
+            <DropdownMenuItem 
+              onClick={() => toast({ title: "Session Settings", description: "Opening session settings" })}
+            >
+              <Settings className="w-4 h-4 mr-2" />
+              Session Settings
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {/* Session Timer */}

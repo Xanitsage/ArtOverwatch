@@ -5,10 +5,42 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      padding: {
+        'safe': 'env(safe-area-inset-bottom) env(safe-area-inset-right) env(safe-area-inset-top) env(safe-area-inset-left)',
+        'pt-safe': 'env(safe-area-inset-top)',
+        'pr-safe': 'env(safe-area-inset-right)',
+        'pb-safe': 'env(safe-area-inset-bottom)',
+        'pl-safe': 'env(safe-area-inset-left)',
+      },
+      animation: {
+        'bounce-slow': 'bounce 3s ease-in-out infinite',
+        'fade-in': 'fadeIn 0.4s cubic-bezier(0.2, 0, 0.2, 1) forwards',
+        'scale-in': 'scaleIn 0.3s cubic-bezier(0.2, 0, 0.2, 1) forwards',
+        'slide-in': 'slideIn 0.4s cubic-bezier(0.2, 0, 0.2, 1) forwards',
+        'slide-up': 'slideUp 0.3s cubic-bezier(0.2, 0, 0.2, 1) forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        slideIn: {
+          '0%': { opacity: '0', transform: 'translateX(10px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
       borderRadius: {
-        lg: ".5625rem", /* 9px */
-        md: ".375rem", /* 6px */
-        sm: ".1875rem", /* 3px */
+        lg: "1rem", /* 16px - more iOS-like */
+        md: ".75rem", /* 12px - more iOS-like */
+        sm: ".5rem", /* 8px - more iOS-like */
       },
       colors: {
         // Flat / base colors (regular buttons)
@@ -103,5 +135,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography"), require("@tailwindcss/line-clamp")],
 } satisfies Config;

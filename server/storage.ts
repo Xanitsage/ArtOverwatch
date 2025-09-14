@@ -94,10 +94,10 @@ export class MemStorage implements IStorage {
     
     // Seed stakeholders
     const defaultStakeholders = [
-      { name: "Community Members", email: "community@artoverwatch.co.za", type: "community", ownershipPercentage: "60.00", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face" },
-      { name: "Creative Label", email: "label@artoverwatch.co.za", type: "investor", ownershipPercentage: "10.00", avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=32&h=32&fit=crop&crop=face" },
-      { name: "Henry Hawkins", email: "henry@artoverwatch.co.za", type: "founder", ownershipPercentage: "15.00", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" },
-      { name: "Lara Collins", email: "lara@artoverwatch.co.za", type: "founder", ownershipPercentage: "15.00", avatar: "https://images.unsplash.com/photo-1494790108755-2616b89ddc4d?w=32&h=32&fit=crop&crop=face" },
+      { name: "Community Members", email: "community@quadravision.co.za", type: "community", ownershipPercentage: "60.00", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=32&h=32&fit=crop&crop=face" },
+       { name: "Creative Label", email: "label@quadravision.co.za", type: "investor", ownershipPercentage: "10.00", avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=32&h=32&fit=crop&crop=face" },
+      { name: "Henry Hawkins", email: "henry@quadravision.co.za", type: "founder", ownershipPercentage: "15.00", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" },
+      { name: "Lara Collins", email: "lara@quadravision.co.za", type: "founder", ownershipPercentage: "15.00", avatar: "https://images.unsplash.com/photo-1494790108755-2616b89ddc4d?w=32&h=32&fit=crop&crop=face" },
     ];
     
     defaultStakeholders.forEach(stakeholder => {

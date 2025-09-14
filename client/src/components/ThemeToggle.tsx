@@ -46,7 +46,7 @@ export default function ThemeToggle() {
       size="icon"
       onClick={toggleTheme}
       data-testid="button-theme-toggle"
-      className="hover-elevate"
+      className="hover-elevate rounded-full shadow-sm backdrop-blur-sm transition-all duration-200"
     >
       {theme === "light" ? (
         <Sun className="h-4 w-4" />

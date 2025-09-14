@@ -29,7 +29,7 @@ export default function CorporateOwnership() {
 
   // Corporate structure data - can be configured or fetched from settings API
   const corporateStructure = {
-    companyName: "ArtOverwatch Creative Corp (Pty) Ltd",
+    companyName: "Quadra Vision Creative Nexus (Pty) Ltd",
     registrationNumber: "CIPC-2024/456789/07",
     foundedDate: "2024-01-15",
     totalShares: 1000,

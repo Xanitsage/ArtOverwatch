@@ -4,26 +4,30 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import CircularProgress from "./CircularProgress";
 import CategoryPill from "./CategoryPill";
-import sampleArt from "@assets/generated_images/Sample_artwork_thumbnail_ebf97e2a.png";
+import sampleArt from "@assets/base_img/artwork-thumb.png";
+import { useEntity } from "@/contexts/EntityContext";
+import { useNavigate } from "react-router-dom";
 
 export default function DashboardOverview() {
+  const { selectedEntity } = useEntity();
+  const navigate = useNavigate();
   const categories = [
     { label: "Creative", active: true },
     { label: "Business", active: false },
-    { label: "180 BPM", active: false, variant: "accent" as const },
+    { label: "Treasury", active: false, variant: "accent" as const },
   ];
 
   const projectData = [
     {
-      name: "Shuddam Ga",
-      subtitle: "Yaman",
+      name: "Gallery Exhibition",
+      subtitle: "Artist Corp",
       progress: 84,
       color: "hsl(var(--chart-1))",
       isPlaying: false
     },
     {
-      name: "16 Beats",
-      subtitle: "Teentaal",
+      name: "Commercial Revenue",
+      subtitle: "Treasury",
       progress: 6,
       color: "hsl(var(--chart-2))",
       isPlaying: true
@@ -31,21 +35,28 @@ export default function DashboardOverview() {
   ];
 
   const controlItems = [
-    { label: "Tanpura", color: "hsl(var(--chart-1))" },
-    { label: "Surpeti", color: "hsl(var(--chart-1))" },
-    { label: "Swarmandal", color: "hsl(var(--chart-1))" },
-    { label: "Fills", color: "hsl(var(--chart-1))" },
+    { label: "Artworks", color: "hsl(var(--chart-1))" },
+    { label: "Exhibitions", color: "hsl(var(--chart-1))" },
+    { label: "IP Rights", color: "hsl(var(--chart-1))" },
+    { label: "Branding", color: "hsl(var(--chart-1))" },
   ];
 
-  const rhythmItems = [
-    { label: "Tabla", color: "hsl(var(--chart-2))" },
-    { label: "Manjira", color: "hsl(var(--chart-2))" },
-    { label: "Ghungroo", color: "hsl(var(--chart-2))" },
-    { label: "Fills", color: "hsl(var(--chart-2))" },
+  const treasuryItems = [
+    { label: "Revenue", color: "hsl(var(--chart-2))" },
+    { label: "Investments", color: "hsl(var(--chart-2))" },
+    { label: "Funding", color: "hsl(var(--chart-2))" },
+    { label: "Insurance", color: "hsl(var(--chart-2))" },
   ];
 
   return (
-    <div className="space-y-6 p-6 min-h-screen">
+    <div className="space-y-6 p-6 min-h-screen pt-safe pb-safe pl-safe pr-safe">
+      {/* Entity Info */}
+      {selectedEntity && (
+        <div className="mb-4">
+          <p className="text-sm text-muted-foreground">Currently viewing dashboard for: <span className="font-medium" style={{ color: selectedEntity.color }}>{selectedEntity.displayName}</span></p>
+        </div>
+      )}
+      
       {/* Status Bar Style Header */}
       <div className="flex items-center justify-between text-sm text-muted-foreground mb-6">
         <div className="flex items-center gap-4">
@@ -121,10 +132,10 @@ export default function DashboardOverview() {
 
         {/* Right Column - Controls */}
         <div className="space-y-6">
-          {/* MELODY Section */}
+          {/* CREATIVE Section */}
           <Card className="p-4">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="text-sm font-medium text-muted-foreground tracking-wide">MELODY</h4>
+              <h4 className="text-sm font-medium text-muted-foreground tracking-wide">CREATIVE</h4>
               <div className="flex gap-1">
                 <div className="w-1 h-6 bg-chart-1 rounded-full"></div>
                 <div className="w-1 h-6 bg-chart-1/50 rounded-full"></div>
@@ -133,10 +144,16 @@ export default function DashboardOverview() {
             </div>
             
             <div className="flex items-center gap-3 mb-4">
-              <Button size="icon" variant="ghost" className="w-10 h-10 rounded-full bg-chart-1/20 hover:bg-chart-1/30" data-testid="button-melody-play">
-                <Pause className="w-5 h-5 text-chart-1" />
+              <Button 
+                size="icon" 
+                variant="ghost" 
+                className="w-10 h-10 rounded-full bg-chart-1/20 hover:bg-chart-1/30" 
+                data-testid="button-creative-view"
+                onClick={() => navigate("/creative")}
+              >
+                <FolderOpen className="w-5 h-5 text-chart-1" />
               </Button>
-              <span className="text-sm font-medium">Play</span>
+              <span className="text-sm font-medium">View</span>
             </div>
             
             <div className="space-y-2">
@@ -154,10 +171,10 @@ export default function DashboardOverview() {
             </div>
           </Card>
           
-          {/* RHYTHM Section */}
+          {/* TREASURY Section */}
           <Card className="p-4">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="text-sm font-medium text-muted-foreground tracking-wide">RHYTHM</h4>
+              <h4 className="text-sm font-medium text-muted-foreground tracking-wide">TREASURY</h4>
               <div className="flex gap-1">
                 <div className="w-1 h-6 bg-chart-2 rounded-full"></div>
                 <div className="w-1 h-6 bg-chart-2/50 rounded-full"></div>
@@ -166,14 +183,20 @@ export default function DashboardOverview() {
             </div>
             
             <div className="flex items-center gap-3 mb-4">
-              <Button size="icon" variant="ghost" className="w-10 h-10 rounded-full bg-chart-2/20 hover:bg-chart-2/30" data-testid="button-rhythm-play">
-                <Pause className="w-5 h-5 text-chart-2" />
+              <Button 
+                size="icon" 
+                variant="ghost" 
+                className="w-10 h-10 rounded-full bg-chart-2/20 hover:bg-chart-2/30" 
+                data-testid="button-treasury-view"
+                onClick={() => navigate("/treasury")}
+              >
+                <DollarSign className="w-5 h-5 text-chart-2" />
               </Button>
-              <span className="text-sm font-medium">Play</span>
+              <span className="text-sm font-medium">View</span>
             </div>
             
             <div className="space-y-2">
-              {rhythmItems.map((item, index) => (
+              {treasuryItems.map((item, index) => (
                 <div key={index} className="flex items-center justify-between py-2">
                   <div className="flex items-center gap-3">
                     <Button size="icon" variant="ghost" className="w-8 h-8 rounded-full bg-chart-2/20">
@@ -189,23 +212,47 @@ export default function DashboardOverview() {
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="flex items-center justify-center gap-12 py-6 border-t border-border/50">
-        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-home">
-          <div className="w-6 h-6 rounded bg-foreground/20"></div>
-          <span className="text-xs text-muted-foreground">HOME</span>
+      {/* Bottom Navigation - iOS Style */}
+      <div className="flex items-center justify-center gap-12 py-6 border-t border-border/50 backdrop-blur-md">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="flex flex-col gap-1.5 h-auto py-2 rounded-full transition-all duration-200" 
+          data-testid="button-nav-home"
+          onClick={() => navigate("/dashboard")}
+        >
+          <div className="w-6 h-6 rounded-full bg-primary/20 shadow-sm"></div>
+          <span className="text-xs font-medium text-muted-foreground">HOME</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-mixes">
-          <div className="w-6 h-6 rounded bg-foreground/20"></div>
-          <span className="text-xs text-muted-foreground">MIXES</span>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="flex flex-col gap-1.5 h-auto py-2 rounded-full transition-all duration-200" 
+          data-testid="button-nav-projects"
+          onClick={() => navigate("/projects")}
+        >
+          <div className="w-6 h-6 rounded-full bg-foreground/20 shadow-sm"></div>
+          <span className="text-xs font-medium text-muted-foreground">PROJECTS</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-keys">
-          <div className="w-6 h-6 rounded bg-foreground/20"></div>
-          <span className="text-xs text-muted-foreground">KEYS</span>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="flex flex-col gap-1.5 h-auto py-2 rounded-full transition-all duration-200" 
+          data-testid="button-nav-members"
+          onClick={() => navigate("/members")}
+        >
+          <div className="w-6 h-6 rounded-full bg-foreground/20 shadow-sm"></div>
+          <span className="text-xs font-medium text-muted-foreground">MEMBERS</span>
         </Button>
-        <Button variant="ghost" size="icon" className="flex flex-col gap-1 h-auto py-2" data-testid="button-nav-help">
-          <div className="w-6 h-6 rounded bg-foreground/20"></div>
-          <span className="text-xs text-muted-foreground">HELP</span>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="flex flex-col gap-1.5 h-auto py-2 rounded-full transition-all duration-200" 
+          data-testid="button-nav-help"
+          onClick={() => navigate("/help")}
+        >
+          <div className="w-6 h-6 rounded-full bg-foreground/20 shadow-sm"></div>
+          <span className="text-xs font-medium text-muted-foreground">HELP</span>
         </Button>
       </div>
     </div>

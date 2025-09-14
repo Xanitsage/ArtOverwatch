@@ -143,7 +143,7 @@ export default function EntityOverview() {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-muted-foreground">Entity Type</h4>
-                      <p>{selectedEntity.type || "Creative Division"}</p>
+                      <p>Creative Division</p>
                     </div>
                   </div>
                   <Separator />

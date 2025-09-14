@@ -100,10 +100,16 @@ svg[data-lucide] {
   --chart-4: 0 0% 60%;
   --chart-5: 0 0% 80%;
 
-  --font-sans: 'SF Pro Display', 'Inter', sans-serif;
-  --font-serif: 'SF Pro Display', 'Inter', sans-serif;
+  --font-sans: 'SF Pro Text', 'Inter', sans-serif;
+  --font-serif: 'SF Pro Text', 'Inter', sans-serif;
   --font-mono: 'SF Mono', Menlo, monospace;
-  --radius: 0.75rem;
+  
+  /* Quadratic Grid System - 8px baseline */
+  --grid-unit: 8px;
+  --text-14: 14px; /* body text */
+  --text-16: 16px; /* labels */
+  --text-18: 18px; /* titles */
+  --radius: 0;
   --shadow-2xs: 0px 2px 4px rgba(0, 0, 0, 0.04);
   --shadow-xs: 0px 2px 5px rgba(0, 0, 0, 0.08);
   --shadow-sm: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 1px 1px rgba(0, 0, 0, 0.04);
@@ -113,7 +119,7 @@ svg[data-lucide] {
   --shadow-xl: 0px 20px 25px -5px rgba(0, 0, 0, 0.08), 0px 10px 10px -5px rgba(0, 0, 0, 0.03);
   --shadow-2xl: 0px 25px 50px -12px rgba(0, 0, 0, 0.15);
   --tracking-normal: 0em;
-  --spacing: 0.25rem;
+  --spacing: 8px; /* 8px baseline grid */
 
   /* Automatically computed borders - intensity can be controlled by the user by the --opaque-button-border-intensity setting */
 

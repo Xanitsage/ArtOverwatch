@@ -1,0 +1,44 @@
+Redesign the entire Art Overwatch app from the ground up — preserving its core idea: a real-time creative collaboration platform where artists submit work, receive structured critiques, and compete in curated challenges.
+
+Design Vision:
+
+Transform the visual identity into a radically minimalist, geometrically precise, black-and-white quadratic UI — inspired by the structure and layout of the referenced smart-home dashboards but reinterpreted through a monochrome, high-contrast, grid-driven aesthetic.
+All shapes must be axis-aligned: sharp corners, straight lines, rectangular cards, linear gradients, and 90° transitions. No curves, no rounded buttons, no soft shadows.
+Replace all existing icons with custom-designed quadratic icons that follow strict grid alignment (e.g., 24x24px pixel-perfect), using strokes, negative space, and minimal geometry to convey meaning (e.g., a "critique" icon as a square with a diagonal slash).
+Rebrand “Artist Corp” to “The Grid Atelier” — a name that evokes precision, creativity, and digital craftsmanship. Update all UI copy accordingly (e.g., “Challenge Feed”, “Peer Review Hub”, “Stroke Log”).
+UI System & Components:
+
+Build upon the shadcn/ui component library as the foundation, but override default styles to enforce:
+Quadratic forms: All buttons, cards, inputs, modals, and navigation bars must have sharp corners (border-radius: 0)
+Monochrome palette: Only use #FFFFFF, #111111, and grayscale tones (#333333, #666666) — no color accents except for highlighted interactive states (e.g., hover = light gray stroke, active = white fill)
+8px baseline grid: All padding, margins, and spacing must be multiples of 8px; text sizes at 14pt, 16pt, 18pt only
+Typography: SF Pro Text or Inter (light/regular) — clean, legible, neutral
+Layout & Structure (Based on Reference Images):
+
+Adopt the modular, card-based layout seen in the smart-home screens:
+Dashboard View: Vertical stack of challenge cards, each with title, status, progress ring (quadratic-style), and action button
+Canvas View: Full-screen workspace with a grid overlay (subtle 16px grid), layered brush paths rendered as thin white lines, and peer annotations appearing as floating labels in corner-aligned boxes
+Critique Hub: Timeline-like interface with horizontal scrollable list of feedback items — each item is a rectangle with user avatar (square), timestamp, and comment text
+Profile & Settings: Clean, vertical form with toggle switches, sliders, and segmented controls — all aligned to the grid
+Interaction Design (Apple HIG Compliant):
+
+Follow Apple’s Human Interface Guidelines: prioritize clarity, consistency, and direct manipulation
+Implement micro-interactions that are subtle and functional:
+Buttons scale slightly on tap (0.95 → 1.05) along x/y axes
+Cards slide in/out horizontally or vertically with ease-in-out timing
+Progress rings animate clockwise in discrete steps (no smooth arc)
+Feedback appears with a fade-in + slight upward shift (but only on axis)
+Ensure accessibility compliance: support VoiceOver, Dynamic Type, and contrast ratio ≥ 4.5:1
+Visual Language (From References, But Transformed):
+
+Retain the card-based modular layout, progress rings, horizontal sliders, and data visualization elements (bar charts, timelines) from the smart-home designs
+But replace color with form: instead of purple/blue accents, use white-on-black with thin borders or dashed outlines to indicate focus or selection
+Use subtle gradients only in backgrounds (e.g., #000000 → #111111) to add depth without breaking the monochrome rule
+Replace circular elements with squares or rectangles — e.g., a "user profile" circle becomes a square with a border, and avatars are cropped to fit perfectly within it
+Deliverables:
+
+Figma prototype with all screens (Dashboard, Canvas, Critique Hub, Profile, Login)
+Component library built with shadcn/ui, customized for quadratic style
+Interactive flows showing navigation, feedback submission, and challenge progression
+Documentation of naming, spacing, typography, and iconography standards
+The final product should feel like a digital art studio powered by algorithmic precision — cold, elegant, and deeply intentional. It should look like it was designed by a futurist architect who believes every line has meaning. 

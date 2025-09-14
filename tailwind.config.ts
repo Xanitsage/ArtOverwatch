@@ -25,8 +25,8 @@ export default {
           '100%': { opacity: '1' },
         },
         scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.95)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
         slideIn: {
           '0%': { opacity: '0', transform: 'translateX(10px)' },
@@ -38,9 +38,10 @@ export default {
         },
       },
       borderRadius: {
-        lg: "1rem", /* 16px - more iOS-like */
-        md: ".75rem", /* 12px - more iOS-like */
-        sm: ".5rem", /* 8px - more iOS-like */
+        lg: "0", /* Quadratic design - no rounded corners */
+        md: "0", /* Quadratic design - no rounded corners */
+        sm: "0", /* Quadratic design - no rounded corners */
+        DEFAULT: "0", /* Global override for quadratic design */
       },
       colors: {
         // Flat / base colors (regular buttons)
@@ -119,19 +120,18 @@ export default {
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
+      fontSize: {
+        '14': ['14px', { lineHeight: '20px' }], /* Body text */
+        '16': ['16px', { lineHeight: '24px' }], /* Labels */
+        '18': ['18px', { lineHeight: '28px' }], /* Titles */
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      spacing: {
+        'grid': '8px',
+        'grid-2': '16px',
+        'grid-3': '24px',
+        'grid-4': '32px',
+        'grid-5': '40px',
+        'grid-6': '48px',
       },
     },
   },

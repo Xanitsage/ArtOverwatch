@@ -1,0 +1,104 @@
+Redesign Art Overwatch into “The Grid Atelier” — a high-precision, monochrome digital platform that empowers artists to collaborate, create, and govern their collective as a transparent, equity-based organization.
+
+Core Functionality (From Diagram):
+
+Artists are members of a shared entity (“The Grid Atelier”)
+Revenue from commercial work flows through a Treasury, split among members based on contribution
+A Label may invest ($100k) in exchange for 10% ownership and access to IP
+The entity owns IP, brand, and business operations
+It pays insurance and receives non-profit funding
+All financial splits are transparent and traceable
+Design Vision:
+
+Transform the app into a minimalist, quadratic, black-and-white interface inspired by architectural blueprints and corporate governance diagrams — clean, precise, and deeply intentional.
+Use only sharp angles, straight lines, and grid-aligned elements — no curves, no soft shadows, no rounded corners. Everything snaps to an 8px baseline grid.
+Replace all icons with custom-designed quadratic symbols that reflect function:
+🔄 → "Splits" = a square with two arrows forming a loop
+💼 → "Treasury" = a box with a coin inside
+👥 → "Members" = stacked squares with smiley faces
+🏦 → "Label" = a bank icon made of rectangles
+🔐 → "IP Ownership" = a lock formed by intersecting lines
+Rebrand “Artist Corp” to “The Grid Atelier” — a name that evokes precision, creativity, and collective ownership. Update all UI text accordingly.
+UI System & Components (shadcn/ui + Quadratic Override):
+
+Build on shadcn/ui but enforce:
+border-radius: 0 on all components
+Monochrome palette: #FFFFFF, #111111, #333333, #666666 only
+Typography: SF Pro Text or Inter, sizes: 14pt (body), 16pt (labels), 18pt (titles)
+Spacing: multiples of 8px; margins/padding: 8, 16, 24, 32
+Interactive states: hover = white border; active = white fill; focus = dashed outline
+Use glassmorphism subtly: only on modals and cards with backdrop-filter: blur(4px) and background: rgba(255,255,255,0.05)
+App Structure (Based on Diagram & Reference Screens):
+
+Dashboard (Home)
+Modular layout of key metrics:
+📊 “Revenue Splits” → bar chart (quadratic bars, white lines)
+💸 “Treasury Balance” → circular progress ring (replaced with square ring)
+👥 “Active Members” → grid of avatars (square, 48x48px)
+🏦 “Label Investment” → card showing $100k investment, 10% ownership
+🔐 “IP Status” → toggle: “Owned by Atelier”
+Bottom nav: Home, Canvas, Splits, Profile
+Canvas View
+Full-screen art workspace with grid overlay (subtle 16px lines)
+Layered brush strokes rendered as thin white lines
+Peer annotations appear as floating rectangular labels with user avatar (square) and timestamp
+Toolbar: tools aligned horizontally, each a square button with a quadratic icon
+Splits Hub
+Timeline view of revenue distribution
+Each transaction is a horizontal rectangle with:
+Source (e.g., “Commercial Revenue”)
+Amount
+Split percentages (e.g., RENE: 25%, YUKI: 30%)
+Destination (e.g., “Treasury”, “Non-Profit Funding”)
+Visualize splits with stacked horizontal bars (like the diagram)
+Click to see full breakdown per member
+Profile & Governance
+Member profile: name, role, ownership %, contributions
+Voting history: list of proposals with yes/no votes (white check/X)
+Treasury dashboard: incoming/outgoing funds, audit trail
+Label agreement: view investment terms, ownership %, rights
+Interaction Design (Apple HIG Compliant):
+
+Direct manipulation: drag sliders, tap to expand, swipe to navigate
+Micro-interactions:
+Cards slide in from bottom (axis-aligned)
+Buttons scale slightly on tap (0.95 → 1.05)
+Progress rings animate clockwise in discrete steps
+Feedback appears with fade-in + upward shift (but only on axis)
+Accessibility: VoiceOver support, Dynamic Type, contrast ≥ 4.5:1
+Visual Language (From References + Diagram):
+
+Retain the modular card layout, progress indicators, and data visualization from the smart-home references
+But replace color with form and structure: use white-on-black with thin borders, dashed outlines, and grid alignment to convey hierarchy and state
+Use flow lines (like in the diagram) to connect related elements — e.g., from “Label” to “Splits” with a thin line
+Make the entire interface feel like a living organizational chart — every element has a purpose, every connection is visible
+Deliverables:
+
+Figma prototype with all screens: Dashboard, Canvas, Splits, Profile, Login
+Custom quadratic icon set (SVGs)
+shadcn/ui component library with overrides for quadratic style
+Interactive flows showing:
+Revenue split breakdown
+Membership voting
+Label investment view
+Canvas collaboration
+Documentation of naming, spacing, typography, and iconography standards
+The final product should feel like a digital constitution for artists — not just a tool, but a governing interface where creativity meets equity. It should look like it was built by a design team at NASA, Apple, and MoMA — cold, precise, beautiful, and deeply human. 
+
+🔍 Why This Works
+Business Logic
+Now directly reflected in UI (e.g., "Splits", "Treasury", "Label")
+Naming
+“The Grid Atelier” ties visual style to concept
+Icons
+Designed to match the quadratic theme and functional clarity
+Flow
+Mirrors the diagram’s structure in app navigation
+Visuals
+Uses reference layouts but transforms them into monochrome, geometric forms
+Depth
+Combines
+smart-home UI elegance
+with
+corporate governance clarity
+
